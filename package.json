@@ -1,0 +1,37 @@
+{
+  "name": "bundler-repl",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "lint": "eslint --cache .",
+    "lint:fix": "pnpm run lint --fix",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@rollup/browser": "^4.20.0",
+    "@vueuse/core": "^11.0.0",
+    "esbuild-wasm": "^0.23.1",
+    "monaco-editor": "^0.50.0",
+    "nuxt": "^3.14.159",
+    "vue": "latest",
+    "vue-router": "latest"
+  },
+  "devDependencies": {
+    "@sxzz/eslint-config": "^4.4.0",
+    "@sxzz/prettier-config": "^2.0.2",
+    "@unocss/nuxt": "^0.64.0",
+    "@unocss/reset": "^0.64.0",
+    "@vueuse/nuxt": "^11.2.0",
+    "eslint": "^9.14.0",
+    "nuxt-monaco-editor": "^1.3.1",
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.4",
+    "unocss": "^0.64.0"
+  },
+  "prettier": "@sxzz/prettier-config"
+}

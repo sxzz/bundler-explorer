@@ -4,6 +4,12 @@ import { fileContent } from '../composables/state'
 
 <template>
   <div>
-    <CodeEditor v-model="fileContent" language="javascript" h-400px />
+    <CodeEditor
+      v-model="fileContent"
+      language="javascript"
+      input
+      h-full
+      w-full
+    />
   </div>
 </template>

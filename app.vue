@@ -33,11 +33,13 @@ useServerHeadSafe({
 </script>
 
 <template>
-  <ClientOnly>
-    <NavBar />
-    <div flex="~ gap-4">
-      <InputContainer min-w-0 flex-1 />
-      <OutputContainer min-w-0 flex-1 />
-    </div>
-  </ClientOnly>
+  <main flex="~ col" lg:h-screen>
+    <ClientOnly>
+      <Navbar />
+      <div flex flex-col gap4 lg:flex-1 lg:flex-row>
+        <InputContainer min-w-0 flex-1 />
+        <OutputContainer min-w-0 flex-1 />
+      </div>
+    </ClientOnly>
+  </main>
 </template>

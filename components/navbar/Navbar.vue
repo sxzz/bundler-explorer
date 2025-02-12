@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { version } from '~/package.json'
-import { bundler } from '../composables/state'
+import BundlerSelect from './BundlerSelect.vue'
 
 const { branch } = useAppConfig()
 </script>
@@ -14,11 +14,7 @@ const { branch } = useAppConfig()
         <small>{{ branch === 'release' ? `v${version}` : 'dev' }}</small>
       </div>
 
-      <select v-model="bundler">
-        <option value="rollup">Rollup</option>
-        <option value="rolldown">Rolldown</option>
-        <option value="esbuild">esbuild</option>
-      </select>
+      <BundlerSelect />
     </div>
 
     <div flex="~ center" gap1>

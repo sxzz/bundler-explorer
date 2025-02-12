@@ -1,62 +1,42 @@
 <script setup lang="ts">
-import { rollup } from '@rollup/browser'
-import { build, initialize } from 'esbuild-wasm'
-import wasmURL from 'esbuild-wasm/esbuild.wasm?url'
+import { bundlers } from '~/composables/bundlers'
 
-const outputCode = ref('')
-
-initialize({ wasmURL })
-
-watch([fileContent, bundler], ([code, bundler]) => {
-  switch (bundler) {
-    case 'rollup':
-      rollupBundle(code)
-      break
-    case 'esbuild':
-      esbuildBundle(code)
-      break
-    // case 'rolldown':
-    //   rolldownBundle(code)
-    //   break
-  }
-})
-
-async function esbuildBundle(code: string) {
-  const bundle = await build({
-    bundle: true,
-    stdin: {
-      contents: code,
-      loader: 'ts',
-    },
-    format: 'esm',
-    write: false,
-  })
-  outputCode.value = bundle.outputFiles[0].text
-}
-
-async function rollupBundle(code: string) {
-  const entry = 'main.js'
-  const bundle = await rollup({
-    input: [entry],
-    plugins: [
-      {
-        name: 'entry',
-        resolveId(source) {
-          return source === entry ? source : null
-        },
-        load(id) {
-          return id === 'main.js' ? code : null
-        },
-      },
-    ],
-  })
-  const result = await bundle.generate({ format: 'esm' })
-  outputCode.value = result.output[0].code
-}
+const { data, status, error } = useAsyncData(
+  '',
+  async () => {
+    const bundler = bundlers[currentBundler.value]
+    if (!bundler.initted && bundler.init) {
+      await bundler.init()
+      bundler.initted = true
+    }
+    const result = await bundler.build(fileContent.value)
+    return result
+  },
+  {
+    server: false,
+    watch: [fileContent, currentBundler],
+  },
+)
 </script>
 
 <template>
-  <div>
-    <CodeEditor v-model="outputCode" language="javascript" h-400px />
+  <div flex>
+    <Loading v-if="status === 'pending'" />
+    <div
+      v-else-if="status === 'error'"
+      overflow-auto
+      whitespace-pre
+      text-red
+      font-mono
+      v-text="error"
+    />
+    <CodeEditor
+      v-show="status === 'success'"
+      v-model="data as any"
+      language="javascript"
+      readonly
+      h-full
+      w-full
+    />
   </div>
 </template>

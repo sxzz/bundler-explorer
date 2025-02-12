@@ -1,3 +1,4 @@
 export const fileContent = ref<string>('')
 
-export const bundler = ref<'rollup' | 'rolldown' | 'esbuild'>('rollup')
+export type Bundler = 'rollup' | 'rolldown' | 'esbuild'
+export const bundler = ref<Bundler>('rollup')

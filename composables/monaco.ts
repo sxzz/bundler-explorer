@@ -4,4 +4,5 @@ export type MonacoLanguage =
   | 'json'
   | 'html'
   | 'vue'
-  | 'svelte'
+  | 'css'
+  | 'yaml'

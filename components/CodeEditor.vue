@@ -13,14 +13,9 @@ const container = shallowRef<{
 
 const options = computed<Monaco.editor.IStandaloneEditorConstructionOptions>(
   () => ({
-    automaticLayout: true,
-    theme: isDark.value ? 'vs-dark' : 'vs',
+    ...getSharedMonacoOptions(),
     fontSize: 14,
-    tabSize: 2,
     fontLigatures: true,
-    minimap: {
-      enabled: false,
-    },
   }),
 )
 </script>

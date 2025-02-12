@@ -1,3 +1,5 @@
+import process from 'node:process'
+
 export default defineNuxtConfig({
   modules: ['@unocss/nuxt', '@vueuse/nuxt', 'nuxt-monaco-editor'],
   ssr: false,
@@ -11,10 +13,15 @@ export default defineNuxtConfig({
     enabled: true,
   },
   css: ['@unocss/reset/tailwind.css', './styles/global.css'],
-  app: {
-    head: {
-      title: 'Bundler REPL',
-      meta: [{ name: 'description', content: 'Bundler REPL' }],
-    },
+  imports: {
+    dirs: [
+      './composables',
+      './composables/state',
+      './composables/parser',
+      './utils',
+    ],
+  },
+  appConfig: {
+    branch: process.env.VERCEL_GIT_COMMIT_REF,
   },
 })

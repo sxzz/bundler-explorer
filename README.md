@@ -1,11 +1,10 @@
-# Bundler REPL
+# Bundler Explorer
 
 ## Todo
 
+- WebContainers
 - Multiple bundler / version
 - Multiple files / entries
-  - filesystem
-- WebContainers opt-in
 
 ## Plan
 
@@ -16,17 +15,13 @@
   - esbuild (transform & build mode)
   - Vite ([WebContainers](https://webcontainers.io/))
   - Webpack / Rspack ([WebContainers](https://webcontainers.io/))
-- File-system?
-- Format (Prettier?)
-- Diff?
+- Diff
 - Version Switching
 - Download as a zip
-- Share as a gist
-- Custom Element?
-  - Power Vue Macros Playground!
 
 ## Reference
 
+- https://ast.sxzz.dev/
 - https://esbuild.egoist.dev/
 - https://esbuild.github.io/try
 - https://rollupjs.org/repl

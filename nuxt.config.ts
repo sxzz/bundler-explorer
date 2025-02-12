@@ -12,7 +12,11 @@ export default defineNuxtConfig({
   devtools: {
     enabled: true,
   },
-  css: ['@unocss/reset/tailwind.css', './styles/global.css'],
+  css: [
+    '@unocss/reset/tailwind.css',
+    '~/styles/vars.css',
+    '~/styles/global.css',
+  ],
   imports: {
     dirs: [
       './composables',

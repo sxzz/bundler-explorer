@@ -1,5 +1,5 @@
 {
-  "name": "bundler-repl",
+  "name": "bundler-explorer",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -24,6 +24,7 @@
     "vue-router": "latest"
   },
   "devDependencies": {
+    "@iconify-json/ri": "^1.2.5",
     "@sxzz/eslint-config": "^5.1.0",
     "@sxzz/prettier-config": "^2.1.2",
     "@unocss/eslint-plugin": "^65.4.3",

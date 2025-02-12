@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { version } from '~/package.json'
 import { bundler } from '../composables/state'
-import { version } from '../package.json'
+
+const { branch } = useAppConfig()
 </script>
 
 <template>
@@ -9,27 +11,42 @@ import { version } from '../package.json'
       <div flex="~ gap1">
         <!-- <Logo /> -->
         <h1 text-lg font-bold>Bundler REPL</h1>
-        <small>v{{ version }}</small>
+        <small>{{ branch === 'release' ? `v${version}` : 'dev' }}</small>
       </div>
 
       <select v-model="bundler">
         <option value="rollup">Rollup</option>
-        <!-- <option value="rolldown">Rolldown</option> -->
+        <option value="rolldown">Rolldown</option>
         <option value="esbuild">esbuild</option>
       </select>
     </div>
 
-    <div flex="~ gap-3">
-      <button @click="toggleDark">
+    <div flex="~ center" gap1>
+      <button title="Toggle Dark Mode" nav-button @click="toggleDark">
         <div i-ri:sun-line dark:i-ri:moon-line />
       </button>
       <a
-        href="https://github.com/sxzz/ast-explorer"
+        href="https://github.com/sxzz/bundler-explorer"
         target="_blank"
-        flex
-        items-center
+        title="GitHub"
+        nav-button
       >
         <div i-ri:github-line />
+      </a>
+      <a
+        href="https://github.com/sponsors/sxzz"
+        target="_blank"
+        flex="~ center"
+        title="Sponsor"
+        group
+        nav-button
+      >
+        <div
+          i-ri:heart-3-line
+          group-hover:i-ri:heart-3-fill
+          text-pink-400
+          group-hover:text-pink-400
+        />
       </a>
     </div>
   </div>

@@ -30,9 +30,10 @@ const { data, status, error } = useAsyncData(
       font-mono
       v-text="error"
     />
+    <!-- @vue-expect-error TODO: data could be null -->
     <CodeEditor
       v-show="status === 'success'"
-      v-model="data as any"
+      v-model="data"
       language="javascript"
       readonly
       h-full

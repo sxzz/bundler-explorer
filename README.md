@@ -10,11 +10,12 @@
 
 - I/O
 - Monaco Editor
-- Add bundlers
-  - Rollup / Rolldown
+- More bundlers
+  - Rolldown
   - esbuild (transform & build mode)
   - Vite ([WebContainers](https://webcontainers.io/))
-  - Webpack / Rspack ([WebContainers](https://webcontainers.io/))
+  - Webpack ([WebContainers](https://webcontainers.io/))
+  - Rspack (needs https://github.com/web-infra-dev/rspack/pull/9134)
 - Diff
 - Version Switching
 - Download as a zip

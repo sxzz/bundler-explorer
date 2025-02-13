@@ -1,4 +1,5 @@
 import { esbuild } from './esbuild'
+import { rolldown } from './rolldown'
 import { rollup } from './rollup'
 
 export type Awaitable<T> = T | Promise<T>
@@ -11,8 +12,15 @@ export interface Bundler<T = void> {
 
   init?: () => Awaitable<T>
   initted?: boolean
-  build: (this: T, code: string) => Awaitable<string>
+  build: (this: T, code: string) => Awaitable<TransformResult>
 }
 
-export const bundlers = { rollup, esbuild }
+export interface TransformResult {
+  code?: string
+  // TODO: multi-files
+  // files: Record<string, string>
+  warnings?: any[]
+}
+
+export const bundlers = { rollup, rolldown, esbuild }
 export type BundlerName = keyof typeof bundlers

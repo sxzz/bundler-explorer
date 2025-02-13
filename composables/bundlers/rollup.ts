@@ -1,4 +1,4 @@
-import { rollup as build } from '@rollup/browser'
+import { rollup as build, type LogLevel, type RollupLog } from '@rollup/browser'
 import type { Bundler } from './index'
 
 export const rollup: Bundler = {
@@ -8,8 +8,16 @@ export const rollup: Bundler = {
   pkgName: '@rollup/browser',
   async build(code) {
     const entry = '_virtual-entry.js'
+    const warnings: any[] = []
     const bundle = await build({
       input: [entry],
+      onLog(level: LogLevel, log: RollupLog, logger) {
+        if (level === 'warn') {
+          warnings.push(log)
+        } else {
+          logger(level, log)
+        }
+      },
       plugins: [
         {
           name: 'entry',
@@ -23,6 +31,9 @@ export const rollup: Bundler = {
       ],
     })
     const result = await bundle.generate({ format: 'esm' })
-    return result.output[0].code
+    return {
+      code: result.output[0].code,
+      warnings,
+    }
   },
 }

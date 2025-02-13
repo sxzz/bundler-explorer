@@ -10,7 +10,7 @@ const { branch } = useAppConfig()
     <div flex="~ gap4">
       <div flex="~ gap1">
         <!-- <Logo /> -->
-        <h1 text-lg font-bold>Bundler REPL</h1>
+        <h1 text-lg font-bold>Bundler Explorer</h1>
         <small>{{ branch === 'release' ? `v${version}` : 'dev' }}</small>
       </div>
 

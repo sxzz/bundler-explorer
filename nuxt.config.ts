@@ -8,6 +8,16 @@ export default defineNuxtConfig({
       exclude: ['@rollup/browser'],
     },
   },
+  nitro: {
+    routeRules: {
+      '**': {
+        headers: {
+          'Cross-Origin-Embedder-Policy': 'require-corp',
+          'Cross-Origin-Opener-Policy': 'same-origin',
+        },
+      },
+    },
+  },
   compatibilityDate: '2024-04-03',
   devtools: {
     enabled: true,
@@ -18,12 +28,7 @@ export default defineNuxtConfig({
     '~/styles/global.css',
   ],
   imports: {
-    dirs: [
-      './composables',
-      './composables/state',
-      './composables/parser',
-      './utils',
-    ],
+    dirs: ['./composables', './utils'],
   },
   appConfig: {
     branch: process.env.VERCEL_GIT_COMMIT_REF,

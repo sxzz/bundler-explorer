@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { bundlers } from '~/composables/bundlers'
+import { bundlers, type TransformResult } from '~/composables/bundlers'
 
 const { data, status, error } = useAsyncData(
   '',
-  async () => {
+  async (): Promise<TransformResult> => {
     const bundler = bundlers[currentBundler.value]
     if (!bundler.initted && bundler.init) {
       await bundler.init()
@@ -20,7 +20,7 @@ const { data, status, error } = useAsyncData(
 </script>
 
 <template>
-  <div flex>
+  <div h-full flex flex-col gap2>
     <Loading v-if="status === 'pending'" />
     <div
       v-else-if="status === 'error'"
@@ -30,14 +30,17 @@ const { data, status, error } = useAsyncData(
       font-mono
       v-text="error"
     />
-    <!-- @vue-expect-error TODO: data could be null -->
     <CodeEditor
       v-show="status === 'success'"
-      v-model="data"
+      :model-value="data?.code || ''"
       language="javascript"
       readonly
-      h-full
+      min-h-0
       w-full
+      flex-1
     />
+    <div v-if="data?.warnings?.length" pb4 text-yellow font-mono>
+      {{ data?.warnings.join('\n') }}
+    </div>
   </div>
 </template>

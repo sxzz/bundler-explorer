@@ -39,7 +39,7 @@ const { data, status, error } = useAsyncData(
       w-full
       flex-1
     />
-    <div v-if="data?.warnings?.length" pb4 text-yellow font-mono>
+    <div v-if="data?.warnings?.length" pb4 text-yellow-600 dark:text-yellow  font-mono>
       {{ data?.warnings.join('\n') }}
     </div>
   </div>

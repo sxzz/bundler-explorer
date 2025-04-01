@@ -1,5 +1,10 @@
 import process from 'node:process'
 
+const crossOriginHeaders = {
+  'Cross-Origin-Embedder-Policy': 'require-corp',
+  'Cross-Origin-Opener-Policy': 'same-origin',
+}
+
 export default defineNuxtConfig({
   modules: ['@unocss/nuxt', '@vueuse/nuxt', 'nuxt-monaco-editor'],
   ssr: false,
@@ -7,14 +12,25 @@ export default defineNuxtConfig({
     optimizeDeps: {
       exclude: ['@rollup/browser'],
     },
+    server: {
+      headers: crossOriginHeaders,
+    },
   },
   nitro: {
     routeRules: {
-      '**': {
-        headers: {
-          'Cross-Origin-Embedder-Policy': 'require-corp',
-          'Cross-Origin-Opener-Policy': 'same-origin',
-        },
+      '/**': {
+        headers: crossOriginHeaders,
+      },
+    },
+    vercel: {
+      config: {
+        routes: [
+          {
+            src: '.*',
+            // @ts-expect-error - type dismatch in `nitropack`
+            headers: crossOriginHeaders,
+          },
+        ],
       },
     },
   },

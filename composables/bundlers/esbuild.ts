@@ -2,13 +2,13 @@ import { build, initialize } from 'esbuild-wasm'
 import wasmURL from 'esbuild-wasm/esbuild.wasm?url'
 import type { Bundler } from './index'
 
-export const esbuild: Bundler = {
+export const esbuild: Bundler<undefined> = {
   id: 'esbuild',
   name: 'esbuild',
   icon: 'i-logos:esbuild',
   pkgName: 'esbuild-wasm',
-  init() {
-    return initialize({ wasmURL })
+  async init() {
+    await initialize({ wasmURL })
   },
   async build(code) {
     const bundle = await build({
@@ -20,6 +20,14 @@ export const esbuild: Bundler = {
       format: 'esm',
       write: false,
     })
-    return bundle.outputFiles[0].text
+    return {
+      code: bundle.outputFiles[0].text,
+    }
   },
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept((newModule: any) => {
+    newModule.esbuild.initted = esbuild.initted
+  })
 }

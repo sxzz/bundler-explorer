@@ -1,4 +1,7 @@
 import type { BundlerName } from './bundlers'
 
-export const fileContent = ref<string>('')
-export const currentBundler = ref<BundlerName>('rollup')
+export const fileContent = useLocalStorage<string>('code', '')
+export const currentBundler = useLocalStorage<BundlerName>(
+  'current-bundler',
+  'rollup',
+)

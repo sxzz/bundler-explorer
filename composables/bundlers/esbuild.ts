@@ -10,18 +10,20 @@ export const esbuild: Bundler<undefined> = {
   async init() {
     await initialize({ wasmURL })
   },
-  async build(code) {
+  async build(code, config) {
     const bundle = await build({
       bundle: true,
+      format: 'esm',
+      ...config,
       stdin: {
         contents: code,
         loader: 'ts',
+        ...config.stdin,
       },
-      format: 'esm',
       write: false,
     })
     return {
-      code: bundle.outputFiles[0].text,
+      code: bundle.outputFiles![0].text,
     }
   },
 }

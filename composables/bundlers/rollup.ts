@@ -6,7 +6,7 @@ export const rollup: Bundler = {
   name: 'Rollup',
   icon: 'i-logos:rollupjs',
   pkgName: '@rollup/browser',
-  async build(code) {
+  async build(code, config) {
     const entry = '_virtual-entry.js'
     const warnings: string[] = []
     const bundle = await build({
@@ -18,6 +18,7 @@ export const rollup: Bundler = {
           logger(level, log)
         }
       },
+      ...config,
       plugins: [
         {
           name: 'entry',
@@ -28,9 +29,13 @@ export const rollup: Bundler = {
             return id === entry ? code : null
           },
         },
+        config?.plugins,
       ],
     })
-    const result = await bundle.generate({ format: 'esm' })
+    const result = await bundle.generate({
+      format: 'esm',
+      ...config?.output,
+    })
     return {
       code: result.output[0].code,
       warnings,

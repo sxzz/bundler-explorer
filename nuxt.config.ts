@@ -7,7 +7,6 @@ const crossOriginHeaders = {
 
 export default defineNuxtConfig({
   modules: ['@unocss/nuxt', '@vueuse/nuxt', 'nuxt-monaco-editor'],
-  ssr: false,
   vite: {
     build: {
       target: 'esnext',

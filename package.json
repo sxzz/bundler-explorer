@@ -21,6 +21,7 @@
     "ansis": "^3.17.0",
     "birpc": "^2.3.0",
     "esbuild-wasm": "^0.25.2",
+    "fflate": "^0.8.2",
     "monaco-editor": "^0.52.2",
     "nuxt": "^3.16.2",
     "pathe": "^2.0.3",

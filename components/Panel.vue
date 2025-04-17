@@ -5,11 +5,11 @@ import { showPanel } from '~/state/panel'
 <template>
   <div
     flex="~ gap-4 items-center"
-    z-panel
+    border="~ base"
     fixed
     bottom-4
     right-4
-    border="~ base"
+    z-panel
     rounded-full
     shadow
     bg-glass

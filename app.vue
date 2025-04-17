@@ -39,7 +39,7 @@ useServerHeadSafe({
       <div min-h-0 flex flex-1 flex-col gap4 lg:flex-row>
         <InputContainer min-w-0 flex-1 />
         <OutputContainer min-w-0 flex-1 />
-        <Panel />
+        <!-- <Panel /> -->
       </div>
     </ClientOnly>
   </main>

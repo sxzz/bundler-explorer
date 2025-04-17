@@ -18,7 +18,7 @@
     "@shikijs/monaco": "^3.2.2",
     "@vueuse/core": "^13.1.0",
     "@webcontainer/api": "^1.5.3",
-    "ansis": "3.14.0",
+    "ansis": "^3.17.0",
     "birpc": "^2.3.0",
     "esbuild-wasm": "^0.25.2",
     "monaco-editor": "^0.52.2",

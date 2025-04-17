@@ -3,23 +3,23 @@ const title = 'Bundler Explorer'
 const desc = 'A web tool to explore and compare different JavaScript bundlers.'
 const url = 'https://bundler.sxzz.dev/'
 
-const ogImage = {
-  url: '/og.png',
-  width: 2560,
-  height: 1280,
-  type: 'image/png',
-} as const
+// const ogImage = {
+//   url: '/og.png',
+//   width: 2560,
+//   height: 1280,
+//   type: 'image/png',
+// } as const
 useServerSeoMeta({
   title,
   description: desc,
   ogTitle: title,
   ogDescription: desc,
-  ogImage,
+  // ogImage,
   ogUrl: url,
   twitterTitle: title,
   twitterDescription: desc,
-  twitterImage: ogImage,
-  twitterCard: 'summary_large_image',
+  // twitterImage: ogImage,
+  // twitterCard: 'summary_large_image',
 })
 
 useServerHeadSafe({

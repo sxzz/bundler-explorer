@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ansis from 'ansis'
 import { bundlers, type TransformResult } from '~/composables/bundlers'
-import { code, currentBundler } from '~/state/bundler'
+import { code, config, currentBundler } from '~/state/bundler'
 
 const { data, status, error } = useAsyncData(
   '',
@@ -12,12 +12,13 @@ const { data, status, error } = useAsyncData(
       context = await bundler.init()
       bundler.initted = true
     }
-    const result = await bundler.build.call(context, code.value)
+    const configObject = new Function(config.value)()
+    const result = await bundler.build.call(context, code.value, configObject)
     return result
   },
   {
     server: false,
-    watch: [code, currentBundler],
+    watch: [code, config, currentBundler],
   },
 )
 
@@ -64,11 +65,12 @@ const errorText = computed(() => {
     <div
       v-if="data?.warnings?.length"
       pb4
+      text-sm
       text-yellow-600
       font-mono
       dark:text-yellow
     >
-      {{ data?.warnings.join('\n') }}
+      {{ ansis.strip(data?.warnings.join('\n') || '') }}
     </div>
   </div>
 </template>

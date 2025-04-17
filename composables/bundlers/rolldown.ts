@@ -10,19 +10,20 @@ export const rolldown: Bundler = {
   name: 'Rolldown',
   icon: 'i-logos:rolldown',
   pkgName: 'i-vscode-icons:file-type-rolldown',
-  async build(code) {
+  async build(code, options) {
     const entry = '/virtual-entry.ts'
-    const warnings: any[] = []
+    const warnings: string[] = []
     const bundle = await build({
       input: [entry],
       cwd: '/',
       onLog(level: LogLevel, log: RollupLog, logger) {
         if (level === 'warn') {
-          warnings.push(log)
+          warnings.push(String(log))
         } else {
           logger(level, log)
         }
       },
+      ...options,
       plugins: [
         {
           name: 'entry',
@@ -33,10 +34,12 @@ export const rolldown: Bundler = {
             return id === entry ? code : null
           },
         },
+        options?.plugins,
       ],
     })
     const result = await bundle.generate({
       format: 'esm',
+      ...options?.output,
     })
     return {
       code: result.output[0].code,

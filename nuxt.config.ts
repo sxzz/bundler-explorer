@@ -9,6 +9,9 @@ export default defineNuxtConfig({
   modules: ['@unocss/nuxt', '@vueuse/nuxt', 'nuxt-monaco-editor'],
   ssr: false,
   vite: {
+    build: {
+      target: 'esnext',
+    },
     optimizeDeps: {
       include: ['ansis'],
       exclude: ['@rollup/browser', '@rolldown/browser'],

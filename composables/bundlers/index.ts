@@ -12,14 +12,14 @@ export interface Bundler<T = void> {
 
   init?: () => Awaitable<T>
   initted?: boolean
-  build: (this: T, code: string) => Awaitable<TransformResult>
+  build: (this: T, code: string, config: any) => Awaitable<TransformResult>
 }
 
 export interface TransformResult {
   code?: string
   // TODO: multi-files
   // files: Record<string, string>
-  warnings?: any[]
+  warnings?: string[]
 }
 
 export const bundlers = { rollup, rolldown, esbuild }

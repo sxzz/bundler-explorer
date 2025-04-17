@@ -8,12 +8,12 @@ export const rollup: Bundler = {
   pkgName: '@rollup/browser',
   async build(code) {
     const entry = '_virtual-entry.js'
-    const warnings: any[] = []
+    const warnings: string[] = []
     const bundle = await build({
       input: [entry],
       onLog(level: LogLevel, log: RollupLog, logger) {
         if (level === 'warn') {
-          warnings.push(log)
+          warnings.push(String(log))
         } else {
           logger(level, log)
         }

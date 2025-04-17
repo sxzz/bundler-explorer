@@ -10,7 +10,8 @@ export default defineNuxtConfig({
   ssr: false,
   vite: {
     optimizeDeps: {
-      exclude: ['@rollup/browser'],
+      include: ['ansis'],
+      exclude: ['@rollup/browser', '@rolldown/browser'],
     },
     server: {
       headers: crossOriginHeaders,

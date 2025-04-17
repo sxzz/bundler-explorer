@@ -11,7 +11,6 @@
 - I/O
 - Monaco Editor
 - More bundlers
-  - Rolldown
   - esbuild (transform & build mode)
   - Vite ([WebContainers](https://webcontainers.io/))
   - Webpack ([WebContainers](https://webcontainers.io/))

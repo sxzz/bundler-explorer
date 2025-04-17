@@ -1,15 +1,24 @@
 <script setup lang="ts">
-import { fileContent } from '../composables/state'
+import { code } from '~/state/bundler'
 </script>
 
 <template>
-  <div>
+  <div flex="~ col">
     <CodeEditor
-      v-model="fileContent"
+      v-model="code"
       language="javascript"
       input
       h-full
+      min-h-0
       w-full
     />
+    <!-- <CodeEditor
+      v-model="code"
+      language="javascript"
+      input
+      h-full
+      min-h-0
+      w-full
+    /> -->
   </div>
 </template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { bundlers } from '~/composables/bundlers'
-import { currentBundler } from '../../composables/state'
+import { currentBundler } from '~/state/bundler'
 </script>
 
 <template>

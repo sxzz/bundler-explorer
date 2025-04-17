@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { code } from '~/state/editor'
 import type { MonacoLanguage } from '#imports'
 import type * as Monaco from 'monaco-editor'
 
@@ -7,6 +6,7 @@ const props = defineProps<{
   language: MonacoLanguage
   readonly?: boolean
 }>()
+const code = defineModel<string>()
 
 const container = shallowRef<{
   $editor: Monaco.editor.IStandaloneCodeEditor | undefined

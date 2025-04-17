@@ -1,5 +1,5 @@
+import { code, codeTemplate } from './bundler'
 import { STORAGE_PREFIX } from './constants'
-import { code, codeTemplate } from './editor'
 
 const LAST_STATE_KEY = `${STORAGE_PREFIX}last-state`
 

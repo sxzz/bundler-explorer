@@ -2,6 +2,7 @@
   "name": "bundler-explorer",
   "version": "0.0.0",
   "private": true,
+  "packageManager": "pnpm@10.8.1",
   "type": "module",
   "scripts": {
     "build": "nuxt build",

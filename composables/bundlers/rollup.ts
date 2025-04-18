@@ -1,6 +1,6 @@
 import { rollup as build, type LogLevel, type RollupLog } from '@rollup/browser'
 import type { Bundler } from './index'
-import ts from 'typescript';
+import { transform as oxcTransform } from 'oxc-transform';
 
 export const rollup: Bundler = {
   id: 'rollup',
@@ -31,19 +31,13 @@ export const rollup: Bundler = {
           },
         },
         {
-          name: 'typescript',
+          name: 'oxc-transform',
           filter: /\.ts$/,
-          transform(code) {
-            const result = ts.transpileModule(code, {
-              compilerOptions: {
-                module: ts.ModuleKind.ESNext,
-                target: ts.ScriptTarget.ESNext,
-                sourceMap: true,
-              },
-            });
+          transform(code, id) {
+            const result = oxcTransform(id, code);
             return {
-              code: result.outputText,
-              map: result.sourceMapText ? JSON.parse(result.sourceMapText) : null,
+              code: result.code,
+              map: result.map,
             };
           }
         },

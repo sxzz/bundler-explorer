@@ -14,6 +14,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@oxc-transform/binding-wasm32-wasi": "^0.64.0",
     "@rolldown/browser": "nightly",
     "@rollup/browser": "^4.40.0",
     "@shikijs/monaco": "^3.2.2",

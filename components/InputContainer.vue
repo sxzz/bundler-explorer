@@ -6,7 +6,7 @@ import { code, config } from '~/state/bundler'
   <div flex="~ col">
     <CodeEditor
       v-model="code"
-      language="javascript"
+      language="typescript"
       input
       h-full
       min-h-0

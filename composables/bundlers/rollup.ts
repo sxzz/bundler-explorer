@@ -1,3 +1,5 @@
+// @ts-expect-error missing types
+import { transform as oxcTransform } from '@oxc-transform/binding-wasm32-wasi'
 import { rollup as build, type LogLevel, type RollupLog } from '@rollup/browser'
 import type { Bundler } from './index'
 
@@ -7,7 +9,7 @@ export const rollup: Bundler = {
   icon: 'i-logos:rollupjs',
   pkgName: '@rollup/browser',
   async build(code, config) {
-    const entry = '_virtual-entry.js'
+    const entry = '_virtual-entry.ts'
     const warnings: string[] = []
     const bundle = await build({
       input: [entry],
@@ -27,6 +29,17 @@ export const rollup: Bundler = {
           },
           load(id) {
             return id === entry ? code : null
+          },
+        },
+        {
+          name: 'oxc-transform',
+          filter: /\.ts$/,
+          transform(code, id) {
+            const result = oxcTransform(id, code)
+            return {
+              code: result.code,
+              map: result.map,
+            }
           },
         },
         config?.plugins,

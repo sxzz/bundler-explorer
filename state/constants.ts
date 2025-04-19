@@ -1,1 +1,1 @@
-export const STORAGE_PREFIX = 'ast-explorer:'
+export const STORAGE_PREFIX = 'bundler-explorer:'

@@ -7,7 +7,7 @@ import { currentBundler } from '~/state/bundler'
   <div>
     <select v-model="currentBundler">
       <option v-for="bundler of bundlers" :key="bundler.id" :value="bundler.id">
-        {{ bundler.name }}
+        {{ bundler.name }} v{{ bundler.version }}
       </option>
     </select>
   </div>

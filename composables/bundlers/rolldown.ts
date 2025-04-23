@@ -1,5 +1,6 @@
 import {
   rolldown as build,
+  VERSION as version,
   type LogLevel,
   type RollupLog,
 } from '@rolldown/browser'
@@ -9,6 +10,7 @@ export const rolldown: Bundler = {
   id: 'rolldown',
   name: 'Rolldown',
   icon: 'i-logos:rolldown',
+  version,
   pkgName: 'i-vscode-icons:file-type-rolldown',
   async build(code, options) {
     const entry = '/virtual-entry.ts'

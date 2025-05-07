@@ -9,6 +9,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "typecheck": "nuxt typecheck",
     "lint": "eslint --cache .",
     "lint:fix": "pnpm run lint --fix",
     "postinstall": "nuxt prepare"

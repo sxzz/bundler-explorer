@@ -9,14 +9,17 @@ export class File {
 export type FileMap = Map<string, File>
 
 export const codeTemplate = 'export const foo = 42'
-export const configTemplate = `// config.js\n\nreturn {}`
+export const configTemplate = `export default {}`
+
+export const DEFAULT_ENTRY = 'index.ts'
 export const defaultFiles = () =>
   new Map([
-    ['index.ts', new File(codeTemplate, true)],
+    [DEFAULT_ENTRY, new File(codeTemplate, true)],
     ['_config.js', new File(configTemplate)],
   ])
 
-export const files = ref<FileMap>(new Map(defaultFiles()))
+export const files = ref<FileMap>(defaultFiles())
+export const activeFile = ref<string>()
 
 export const currentBundlerId = useLocalStorage<BundlerName>(
   'current-bundler',

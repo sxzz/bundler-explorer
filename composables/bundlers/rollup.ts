@@ -1,6 +1,11 @@
 // @ts-expect-error missing types
 import { transform as oxcTransform } from '@oxc-transform/binding-wasm32-wasi'
-import { rollup as build, VERSION as version, type LogLevel, type RollupLog } from '@rollup/browser'
+import {
+  rollup as build,
+  VERSION as version,
+  type LogLevel,
+  type RollupLog,
+} from '@rollup/browser'
 import type { Bundler } from './index'
 
 export const rollup: Bundler = {

@@ -48,7 +48,8 @@
     "nuxt-monaco-editor": "^1.3.1",
     "prettier": "^3.5.3",
     "typescript": "^5.8.3",
-    "unocss": "^66.1.0"
+    "unocss": "^66.1.0",
+    "vue-tsc": "^2.2.10"
   },
   "prettier": "@sxzz/prettier-config"
 }

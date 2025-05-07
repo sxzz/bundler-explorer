@@ -47,13 +47,17 @@ export const rollup: Bundler = {
         },
         {
           name: 'oxc-transform',
-          filter: /\.ts$/,
-          transform(code, id) {
-            const result = oxcTransform(id, code)
-            return {
-              code: result.code,
-              map: result.map,
-            }
+          transform: {
+            filter: {
+              id: /\.ts$/,
+            },
+            handler(code, id) {
+              const result = oxcTransform(id, code)
+              return {
+                code: result.code,
+                map: result.map,
+              }
+            },
           },
         },
         config?.plugins,

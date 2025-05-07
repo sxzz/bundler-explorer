@@ -25,7 +25,15 @@ function resetState() {
       <BundlerSelect />
     </div>
 
-    <div v-if="timeCost !== null" flex items-center gap1 text-sm font-mono title="Last build time">
+    <div
+      v-if="timeCost != null"
+      flex
+      items-center
+      gap1
+      text-sm
+      font-mono
+      title="Last build time"
+    >
       <div i-ri:time-line op60 />
       <span op80>{{ timeCost }}ms</span>
     </div>

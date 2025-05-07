@@ -26,3 +26,5 @@ export const currentBundlerId = useLocalStorage<BundlerName>(
   'rollup',
 )
 export const currentBundler = computed(() => bundlers[currentBundlerId.value])
+
+export const timeCost = ref<number>()

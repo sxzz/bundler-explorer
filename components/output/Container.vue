@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ansis from 'ansis'
 import { bundlers, type TransformResult } from '~/composables/bundlers'
-import { currentBundlerId, files } from '~/state/bundler'
+import { currentBundlerId, files, timeCost } from '~/state/bundler'
 
 const { data, status, error, refresh } = useAsyncData(
   '',
@@ -23,12 +23,13 @@ const { data, status, error, refresh } = useAsyncData(
       const mod = await import(/* @vite-ignore */ configUrl)
       configObject = mod.default || mod
     }
+    const entries = Array.from(files.value.entries())
+      .filter(([, file]) => file.isEntry)
+      .map(([name]) => `/${name}`)
+
+    const startTime = performance.now()
 
     try {
-      const entries = Array.from(files.value.entries())
-        .filter(([, file]) => file.isEntry)
-        .map(([name]) => `/${name}`)
-
       const result = await bundler.build.call(
         context,
         files.value,
@@ -37,11 +38,18 @@ const { data, status, error, refresh } = useAsyncData(
       )
       return result
     } finally {
+      timeCost.value = Math.round(performance.now() - startTime)
       if (configUrl) URL.revokeObjectURL(configUrl)
     }
   },
   { server: false, deep: false },
 )
+
+watch(status, (newStatus) => {
+  if (newStatus === 'pending') {
+    timeCost.value = undefined
+  }
+})
 
 watch([files, currentBundlerId], () => refresh(), {
   deep: true,

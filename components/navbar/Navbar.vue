@@ -7,6 +7,7 @@ import {
   DEFAULT_ENTRY,
   defaultFiles,
   files,
+  timeCost,
 } from '~/state/bundler'
 import BundlerSelect from './BundlerSelect.vue'
 
@@ -36,6 +37,19 @@ function resetState() {
       <BundlerSelect />
     </div>
 
+    <div
+      v-if="timeCost != null"
+      flex
+      items-center
+      gap1
+      text-sm
+      font-mono
+      title="Last build time"
+    >
+      <div i-ri:time-line op60 />
+      <span op80>{{ timeCost }}ms</span>
+    </div>
+
     <div flex="~ center" gap1>
       <a
         :href="`https://npmjs.com/package/${currentBundler.pkgName}/v/${currentBundler.version}`"
@@ -45,6 +59,7 @@ function resetState() {
         gap1
         text-sm
         font-mono
+        :title="`${currentBundler.pkgName}@${currentBundler.version}`"
       >
         <div :class="currentBundler.icon" />
         <div op80>

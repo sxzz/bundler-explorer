@@ -77,7 +77,7 @@ function horizontalScroll(e: WheelEvent) {
 
 <template>
   <div flex="~ col" gap2>
-    <div flex items-center justify-between>
+    <div flex items-center>
       <div
         ref="tabsRef"
         flex

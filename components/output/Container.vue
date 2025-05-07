@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ansis from 'ansis'
 import { bundlers, type TransformResult } from '~/composables/bundlers'
-import { code, config, currentBundlerId, lastBuildTime } from '~/state/bundler'
+import { code, config, currentBundlerId, timeCost } from '~/state/bundler'
 
 const isInitialExecution = ref(true)
 
@@ -18,10 +18,9 @@ const { data, status, error } = useAsyncData(
     const configObject = new Function(config.value)()
     const startTime = performance.now()
     const result = await bundler.build.call(context, code.value, configObject)
-    const endTime = performance.now()
 
     if (!isInitialExecution.value) {
-      lastBuildTime.value = Math.round(endTime - startTime)
+      timeCost.value = Math.round(performance.now() - startTime)
     }
     isInitialExecution.value = false
 
@@ -35,7 +34,7 @@ const { data, status, error } = useAsyncData(
 
 watch(status, (newStatus) => {
   if (newStatus === 'pending') {
-    lastBuildTime.value = null
+    timeCost.value = undefined
   }
 })
 

@@ -12,4 +12,4 @@ export const currentBundlerId = useLocalStorage<BundlerName>(
 )
 export const currentBundler = computed(() => bundlers[currentBundlerId.value])
 
-export const lastBuildTime = ref<number | null>(null)
+export const timeCost = ref<number>()

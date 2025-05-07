@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { version } from '~/package.json'
 import BundlerSelect from './BundlerSelect.vue'
-import { code, config, codeTemplate, configTemplate, currentBundler, lastBuildTime } from '~/state/bundler'
+import { code, config, codeTemplate, configTemplate, currentBundler, timeCost } from '~/state/bundler'
 import { toggleDark } from '~/composables/dark'
 
 const { branch } = useAppConfig()
@@ -25,9 +25,9 @@ function resetState() {
       <BundlerSelect />
     </div>
 
-    <div v-if="lastBuildTime !== null" flex items-center gap1 text-sm font-mono title="Last build time">
+    <div v-if="timeCost !== null" flex items-center gap1 text-sm font-mono title="Last build time">
       <div i-ri:time-line op60 />
-      <span op80>{{ lastBuildTime }}ms</span>
+      <span op80>{{ timeCost }}ms</span>
     </div>
 
     <div flex="~ center" gap1>
@@ -46,7 +46,6 @@ function resetState() {
           {{ currentBundler.pkgName }}@{{ currentBundler.version }}
         </div>
       </a>
-
 
       <button title="Reset State" nav-button @click="resetState">
         <div i-ri:refresh-line />

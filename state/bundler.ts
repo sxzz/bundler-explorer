@@ -11,3 +11,5 @@ export const currentBundlerId = useLocalStorage<BundlerName>(
   'rollup',
 )
 export const currentBundler = computed(() => bundlers[currentBundlerId.value])
+
+export const lastBuildTime = ref<number | null>(null)

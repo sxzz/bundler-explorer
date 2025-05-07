@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import ansis from 'ansis'
 import { bundlers, type TransformResult } from '~/composables/bundlers'
-import { code, config, currentBundlerId } from '~/state/bundler'
+import { code, config, currentBundlerId, lastBuildTime } from '~/state/bundler'
+
+const isInitialExecution = ref(true)
 
 const { data, status, error } = useAsyncData(
   '',
@@ -12,8 +14,17 @@ const { data, status, error } = useAsyncData(
       context = await bundler.init()
       bundler.initted = true
     }
+
     const configObject = new Function(config.value)()
+    const startTime = performance.now()
     const result = await bundler.build.call(context, code.value, configObject)
+    const endTime = performance.now()
+
+    if (!isInitialExecution.value) {
+      lastBuildTime.value = Math.round(endTime - startTime)
+    }
+    isInitialExecution.value = false
+
     return result
   },
   {
@@ -21,6 +32,12 @@ const { data, status, error } = useAsyncData(
     watch: [code, config, currentBundlerId],
   },
 )
+
+watch(status, (newStatus) => {
+  if (newStatus === 'pending') {
+    lastBuildTime.value = null
+  }
+})
 
 const errorText = computed(() => {
   if (!error.value) return ''

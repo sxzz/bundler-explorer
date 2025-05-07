@@ -20,7 +20,7 @@ const { data, status, error, refresh } = useAsyncData(
       configUrl = URL.createObjectURL(
         new Blob([configCode || ''], { type: 'text/javascript' }),
       )
-      const mod = await import(configUrl)
+      const mod = await import(/* @vite-ignore */ configUrl)
       configObject = mod.default || mod
     }
 

@@ -1,3 +1,4 @@
+import type { FileMap } from '~/state/bundler'
 import { esbuild } from './esbuild'
 import { rolldown } from './rolldown'
 import { rollup } from './rollup'
@@ -13,13 +14,16 @@ export interface Bundler<T = void> {
 
   init?: () => Awaitable<T>
   initted?: boolean
-  build: (this: T, code: string, config: any) => Awaitable<TransformResult>
+  build: (
+    this: T,
+    files: FileMap,
+    entries: string[],
+    config: any,
+  ) => Awaitable<TransformResult>
 }
 
 export interface TransformResult {
-  code?: string
-  // TODO: multi-files
-  // files: Record<string, string>
+  output: Record<string, string>
   warnings?: string[]
 }
 

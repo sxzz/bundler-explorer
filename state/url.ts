@@ -1,4 +1,4 @@
-import { code, codeTemplate, config, configTemplate } from './bundler'
+import { defaultFiles, File, files } from './bundler'
 import { STORAGE_PREFIX } from './constants'
 
 const LAST_STATE_KEY = `${STORAGE_PREFIX}last-state`
@@ -10,18 +10,21 @@ export function initUrlState() {
     const serialized = localStorage.getItem(LAST_STATE_KEY)
     if (serialized) state = JSON.parse(serialized)
   }
-  code.value = state?.c || codeTemplate
-  config.value = state?.o || configTemplate
+
+  files.value = new Map(
+    Object.entries((state?.f || {}) as Record<string, File>).map(([k, v]) => [
+      k,
+      new File(v.code, v.isEntry),
+    ]),
+  )
+  if (files.value.size === 0) {
+    files.value = new Map(defaultFiles())
+  }
 
   // serialize state to url
   watchEffect(() => {
-    // code
-    const c = code.value === codeTemplate ? '' : code.value
-    const o = config.value === configTemplate ? '' : config.value
-    const serialized = JSON.stringify({
-      c,
-      o,
-    })
+    const f = Object.fromEntries(files.value)
+    const serialized = JSON.stringify({ f })
     location.hash = utoa(serialized)
     localStorage.setItem(LAST_STATE_KEY, serialized)
   })

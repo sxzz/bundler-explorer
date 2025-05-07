@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import ansis from 'ansis'
 import { bundlers, type TransformResult } from '~/composables/bundlers'
-import { code, config, currentBundlerId, timeCost } from '~/state/bundler'
+import { currentBundlerId, files, timeCost } from '~/state/bundler'
 
-const { data, status, error } = useAsyncData(
+const { data, status, error, refresh } = useAsyncData(
   '',
   async (): Promise<TransformResult> => {
     const bundler = bundlers[currentBundlerId.value]
@@ -12,19 +12,37 @@ const { data, status, error } = useAsyncData(
       context = await bundler.init()
       bundler.initted = true
     }
+    const configCode = files.value.get('_config.js')?.code
+    let configObject: any = {}
 
-    const configObject = new Function(config.value)()
+    let configUrl: string | undefined
+    if (configCode) {
+      configUrl = URL.createObjectURL(
+        new Blob([configCode || ''], { type: 'text/javascript' }),
+      )
+      const mod = await import(/* @vite-ignore */ configUrl)
+      configObject = mod.default || mod
+    }
+    const entries = Array.from(files.value.entries())
+      .filter(([, file]) => file.isEntry)
+      .map(([name]) => `/${name}`)
+
     const startTime = performance.now()
-    const result = await bundler.build.call(context, code.value, configObject)
 
-    timeCost.value = Math.round(performance.now() - startTime)
-
-    return result
+    try {
+      const result = await bundler.build.call(
+        context,
+        files.value,
+        entries,
+        configObject,
+      )
+      return result
+    } finally {
+      timeCost.value = Math.round(performance.now() - startTime)
+      if (configUrl) URL.revokeObjectURL(configUrl)
+    }
   },
-  {
-    server: false,
-    watch: [code, config, currentBundlerId],
-  },
+  { server: false, deep: false },
 )
 
 watch(status, (newStatus) => {
@@ -32,6 +50,12 @@ watch(status, (newStatus) => {
     timeCost.value = undefined
   }
 })
+
+watch([files, currentBundlerId], () => refresh(), {
+  deep: true,
+})
+
+const tabs = computed(() => Object.keys(data.value?.output || {}))
 
 const errorText = computed(() => {
   if (!error.value) return ''
@@ -64,15 +88,25 @@ const errorText = computed(() => {
       font-mono
       v-text="errorText"
     />
-    <CodeEditor
-      v-show="status === 'success'"
-      :model-value="data?.code || ''"
-      language="javascript"
+    <Tabs
+      v-if="status === 'success'"
+      v-slot="{ value }"
+      :tabs
       readonly
       min-h-0
       w-full
       flex-1
-    />
+    >
+      <CodeEditor
+        v-show="status === 'success'"
+        :model-value="data?.output[value] || ''"
+        language="javascript"
+        readonly
+        min-h-0
+        w-full
+        flex-1
+      />
+    </Tabs>
     <div
       v-if="data?.warnings?.length"
       pb4

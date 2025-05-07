@@ -109,6 +109,7 @@ const errorText = computed(() => {
     </Tabs>
     <div
       v-if="data?.warnings?.length"
+      whitespace-pre
       pb4
       text-sm
       text-yellow-600

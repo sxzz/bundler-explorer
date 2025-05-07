@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import ansis from 'ansis'
 import { bundlers, type TransformResult } from '~/composables/bundlers'
-import { code, config, currentBundlerId } from '~/state/bundler'
+import { currentBundlerId, files } from '~/state/bundler'
 
-const { data, status, error } = useAsyncData(
+const { data, status, error, refresh } = useAsyncData(
   '',
   async (): Promise<TransformResult> => {
     const bundler = bundlers[currentBundlerId.value]
@@ -12,15 +12,42 @@ const { data, status, error } = useAsyncData(
       context = await bundler.init()
       bundler.initted = true
     }
-    const configObject = new Function(config.value)()
-    const result = await bundler.build.call(context, code.value, configObject)
-    return result
+    const configCode = files.value.get('_config.js')?.code
+    let configObject: any = {}
+
+    let configUrl: string | undefined
+    if (configCode) {
+      configUrl = URL.createObjectURL(
+        new Blob([configCode || ''], { type: 'text/javascript' }),
+      )
+      const mod = await import(configUrl)
+      configObject = mod.default || mod
+    }
+
+    try {
+      const entries = Array.from(files.value.entries())
+        .filter(([, file]) => file.isEntry)
+        .map(([name]) => `/${name}`)
+
+      const result = await bundler.build.call(
+        context,
+        files.value,
+        entries,
+        configObject,
+      )
+      return result
+    } finally {
+      if (configUrl) URL.revokeObjectURL(configUrl)
+    }
   },
-  {
-    server: false,
-    watch: [code, config, currentBundlerId],
-  },
+  { server: false, deep: false },
 )
+
+watch([files, currentBundlerId], () => refresh(), {
+  deep: true,
+})
+
+const tabs = computed(() => Object.keys(data.value?.output || {}))
 
 const errorText = computed(() => {
   if (!error.value) return ''
@@ -53,15 +80,25 @@ const errorText = computed(() => {
       font-mono
       v-text="errorText"
     />
-    <CodeEditor
-      v-show="status === 'success'"
-      :model-value="data?.code || ''"
-      language="javascript"
+    <Tabs
+      v-if="status === 'success'"
+      v-slot="{ value }"
+      :tabs
       readonly
       min-h-0
       w-full
       flex-1
-    />
+    >
+      <CodeEditor
+        v-show="status === 'success'"
+        :model-value="data?.output[value] || ''"
+        language="javascript"
+        readonly
+        min-h-0
+        w-full
+        flex-1
+      />
+    </Tabs>
     <div
       v-if="data?.warnings?.length"
       pb4

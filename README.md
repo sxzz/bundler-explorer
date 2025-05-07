@@ -4,7 +4,6 @@
 
 - WebContainers
 - Multiple bundler / version
-- Multiple files / entries
 
 ## Plan
 

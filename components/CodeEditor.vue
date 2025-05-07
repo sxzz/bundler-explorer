@@ -6,7 +6,7 @@ const props = defineProps<{
   language: MonacoLanguage
   readonly?: boolean
 }>()
-const code = defineModel<string>()
+const code = defineModel<string>({ required: true })
 
 const container = shallowRef<{
   $editor: Monaco.editor.IStandaloneCodeEditor | undefined

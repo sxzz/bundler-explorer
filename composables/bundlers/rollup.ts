@@ -31,14 +31,10 @@ export const rollup: Bundler = {
           resolveId(source, importer) {
             if (source[0] === '/' || source[0] === '.') {
               return resolve(importer || '/', '..', source)
-            } else {
-              throw new Error(`Cannot resolve ${source}`)
             }
           },
           load(id) {
-            if (id[0] !== '/') {
-              throw new Error(`Cannot load ${id}`)
-            }
+            if (id[0] !== '/') return
             id = id.slice(1)
             if (files.has(id)) {
               return files.get(id)!.code

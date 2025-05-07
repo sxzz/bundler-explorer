@@ -4,9 +4,10 @@ import {
   initialize,
   version,
   type BuildOptions,
+  type Loader,
 } from 'esbuild-wasm'
 import wasmURL from 'esbuild-wasm/esbuild.wasm?url'
-import { resolve } from 'pathe'
+import { extname, resolve } from 'pathe'
 import type { Bundler } from './index'
 
 // @unocss-include
@@ -34,18 +35,18 @@ export const esbuild: Bundler<undefined> = {
             build.onResolve({ filter: /.*/ }, (args) => {
               if (args.path[0] === '/' || args.path[0] === '.') {
                 return { path: resolve(args.importer, '..', args.path) }
-              } else {
-                //     throw new Error(`Cannot resolve ${source}`)
               }
             })
 
             build.onLoad({ filter: /.*/ }, (args) => {
-              if (args.path[0] !== '/') {
-                throw new Error(`Cannot load ${args.path}`)
-              }
+              if (args.path[0] !== '/') return
+
               const id = args.path.slice(1)
               if (files.has(id)) {
-                return { contents: files.get(id)!.code }
+                return {
+                  contents: files.get(id)!.code,
+                  loader: guessLoader(id),
+                }
               }
             })
           },
@@ -67,6 +68,28 @@ export const esbuild: Bundler<undefined> = {
       warnings,
     }
   },
+}
+
+const ExtToLoader: Record<string, Loader> = {
+  '.js': 'js',
+  '.mjs': 'js',
+  '.cjs': 'js',
+  '.jsx': 'jsx',
+  '.ts': 'ts',
+  '.cts': 'ts',
+  '.mts': 'ts',
+  '.tsx': 'tsx',
+  '.css': 'css',
+  '.less': 'css',
+  '.stylus': 'css',
+  '.scss': 'css',
+  '.sass': 'css',
+  '.json': 'json',
+  '.txt': 'text',
+}
+
+export function guessLoader(id: string): Loader {
+  return ExtToLoader[extname(id).toLowerCase()] || 'js'
 }
 
 if (import.meta.hot) {

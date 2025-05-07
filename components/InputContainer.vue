@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { codeTemplate, File, files } from '~/state/bundler'
+import { activeFile, File, files } from '~/state/bundler'
 
 const tabs = computed(() => Array.from(files.value.keys()))
 
@@ -37,6 +37,7 @@ function setEntry(name: string) {
 <template>
   <div flex="~ col" pl3>
     <Tabs
+      v-model="activeFile"
       :tabs
       h-full
       min-h-0

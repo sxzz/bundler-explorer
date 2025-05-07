@@ -1,15 +1,27 @@
 <script setup lang="ts">
-import { version } from '~/package.json'
-import BundlerSelect from './BundlerSelect.vue'
-import { code, config, codeTemplate, configTemplate, currentBundler, timeCost } from '~/state/bundler'
 import { toggleDark } from '~/composables/dark'
+import { version } from '~/package.json'
+import {
+  activeFile,
+  currentBundler,
+  DEFAULT_ENTRY,
+  defaultFiles,
+  files,
+  timeCost,
+} from '~/state/bundler'
+import BundlerSelect from './BundlerSelect.vue'
 
 const { branch } = useAppConfig()
 
 function resetState() {
-  if (window.confirm("Are you sure you want to reset the code and config to their default values?")) {
-    code.value = codeTemplate
-    config.value = configTemplate
+  if (
+    // eslint-disable-next-line no-alert
+    window.confirm(
+      'Are you sure you want to reset the code and config to their default values?',
+    )
+  ) {
+    activeFile.value = DEFAULT_ENTRY
+    files.value = defaultFiles()
   }
 }
 </script>

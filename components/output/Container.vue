@@ -3,8 +3,6 @@ import ansis from 'ansis'
 import { bundlers, type TransformResult } from '~/composables/bundlers'
 import { code, config, currentBundlerId, timeCost } from '~/state/bundler'
 
-const isInitialExecution = ref(true)
-
 const { data, status, error } = useAsyncData(
   '',
   async (): Promise<TransformResult> => {
@@ -19,10 +17,7 @@ const { data, status, error } = useAsyncData(
     const startTime = performance.now()
     const result = await bundler.build.call(context, code.value, configObject)
 
-    if (!isInitialExecution.value) {
-      timeCost.value = Math.round(performance.now() - startTime)
-    }
-    isInitialExecution.value = false
+    timeCost.value = Math.round(performance.now() - startTime)
 
     return result
   },

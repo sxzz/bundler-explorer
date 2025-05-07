@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { version } from '~/package.json'
+import { currentBundler } from '~/state/bundler'
 import BundlerSelect from './BundlerSelect.vue'
 
 const { branch } = useAppConfig()
@@ -18,6 +19,21 @@ const { branch } = useAppConfig()
     </div>
 
     <div flex="~ center" gap1>
+      <a
+        :href="`https://npmjs.com/package/${currentBundler.pkgName}/v/${currentBundler.version}`"
+        target="_blank"
+        flex
+        items-center
+        gap1
+        text-sm
+        font-mono
+      >
+        <div :class="currentBundler.icon" />
+        <div op80>
+          {{ currentBundler.pkgName }}@{{ currentBundler.version }}
+        </div>
+      </a>
+
       <button title="Toggle Dark Mode" nav-button @click="toggleDark">
         <div i-ri:sun-line dark:i-ri:moon-line />
       </button>

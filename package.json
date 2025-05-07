@@ -36,6 +36,7 @@
     "@iconify-json/logos": "^1.2.4",
     "@iconify-json/ph": "^1.2.2",
     "@iconify-json/ri": "^1.2.5",
+    "@iconify-json/vscode-icons": "^1.2.20",
     "@sxzz/eslint-config": "^7.0.0",
     "@sxzz/prettier-config": "^2.2.1",
     "@unocss/eslint-plugin": "^66.1.0",

@@ -6,12 +6,14 @@ import {
 } from '@rolldown/browser'
 import type { Bundler } from './index'
 
+// @unocss-include
+
 export const rolldown: Bundler = {
   id: 'rolldown',
   name: 'Rolldown',
-  icon: 'i-logos:rolldown',
+  icon: 'i-vscode-icons:file-type-rolldown',
   version,
-  pkgName: 'i-vscode-icons:file-type-rolldown',
+  pkgName: '@rolldown/browser',
   async build(code, options) {
     const entry = '/virtual-entry.ts'
     const warnings: string[] = []

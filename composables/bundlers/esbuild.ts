@@ -2,6 +2,8 @@ import { build, initialize, version } from 'esbuild-wasm'
 import wasmURL from 'esbuild-wasm/esbuild.wasm?url'
 import type { Bundler } from './index'
 
+// @unocss-include
+
 export const esbuild: Bundler<undefined> = {
   id: 'esbuild',
   name: 'esbuild',

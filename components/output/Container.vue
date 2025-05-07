@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import ansis from 'ansis'
 import { bundlers, type TransformResult } from '~/composables/bundlers'
-import { code, config, currentBundler } from '~/state/bundler'
+import { code, config, currentBundlerId } from '~/state/bundler'
 
 const { data, status, error } = useAsyncData(
   '',
   async (): Promise<TransformResult> => {
-    const bundler = bundlers[currentBundler.value]
+    const bundler = bundlers[currentBundlerId.value]
     let context: any
     if (!bundler.initted && bundler.init) {
       context = await bundler.init()
@@ -18,7 +18,7 @@ const { data, status, error } = useAsyncData(
   },
   {
     server: false,
-    watch: [code, config, currentBundler],
+    watch: [code, config, currentBundlerId],
   },
 )
 

@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { bundlers } from '~/composables/bundlers'
-import { currentBundler } from '~/state/bundler'
+import { currentBundlerId } from '~/state/bundler'
 </script>
 
 <template>
-  <div>
-    <select v-model="currentBundler">
+  <div flex items-center gap2>
+    <select v-model="currentBundlerId">
       <option v-for="bundler of bundlers" :key="bundler.id" :value="bundler.id">
-        {{ bundler.name }} v{{ bundler.version }}
+        {{ bundler.name }}
       </option>
     </select>
   </div>

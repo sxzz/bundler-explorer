@@ -74,6 +74,9 @@ importers:
       '@iconify-json/ri':
         specifier: ^1.2.5
         version: 1.2.5
+      '@iconify-json/vscode-icons':
+        specifier: ^1.2.20
+        version: 1.2.20
       '@sxzz/eslint-config':
         specifier: ^7.0.0
         version: 7.0.0(@types/eslint@9.6.1)(@typescript-eslint/eslint-plugin@8.32.0(@typescript-eslint/parser@8.32.0(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3))(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3))(@unocss/eslint-plugin@66.1.0(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3))(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3)
@@ -650,6 +653,9 @@ packages:
   '@iconify-json/ri@1.2.5':
     resolution: {integrity: sha512-kWGimOXMZrlYusjBKKXYOWcKhbOHusFsmrmRGmjS7rH0BpML5A9/fy8KHZqFOwZfC4M6amObQYbh8BqO5cMC3w==}
 
+  '@iconify-json/vscode-icons@1.2.20':
+    resolution: {integrity: sha512-xuWqr/SrckUoFi6kpSH/NrNGK+CuZ8LNnBY8qkRdkQvHmhirXvwsLfTKHoFndTsOlxfsHahlOLVCCb523kdqMA==}
+
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
 
@@ -865,7 +871,6 @@ packages:
   '@oxc-transform/binding-wasm32-wasi@0.68.1':
     resolution: {integrity: sha512-j34+k0j508K//mnjSRIU0FMUF6+7fdzDyRT2NwEAgxOx10HGgDQ+SYjBXIljYoL1jrVP0RV53rRm5c9nvranng==}
     engines: {node: '>=14.0.0'}
-    cpu: [wasm32]
 
   '@parcel/watcher-android-arm64@2.5.1':
     resolution: {integrity: sha512-KF8+j9nNbUN8vzOFDpRMsaKBHZ/mcjEjMToVMJOhTozkDonQFFrRcfdLWn6yWKCmJKmdVxSgHiYvTCef4/qcBA==}
@@ -5901,6 +5906,10 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify-json/ri@1.2.5':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/vscode-icons@1.2.20':
     dependencies:
       '@iconify/types': 2.0.0
 

@@ -8,6 +8,8 @@ import {
 } from '@rollup/browser'
 import type { Bundler } from './index'
 
+// @unocss-include
+
 export const rollup: Bundler = {
   id: 'rollup',
   name: 'Rollup',

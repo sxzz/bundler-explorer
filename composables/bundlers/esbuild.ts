@@ -1,14 +1,8 @@
-import {
-  build,
-  formatMessages,
-  initialize,
-  version,
-  type BuildOptions,
-  type Loader,
-} from 'esbuild-wasm'
+import * as EsbuildAPI from 'esbuild-wasm'
 import wasmURL from 'esbuild-wasm/esbuild.wasm?url'
 import { extname, resolve } from 'pathe'
 import type { Bundler } from './index'
+import type { BuildOptions, Loader } from 'esbuild-wasm'
 
 // @unocss-include
 
@@ -16,14 +10,15 @@ export const esbuild: Bundler<undefined> = {
   id: 'esbuild',
   name: 'esbuild',
   icon: 'i-logos:esbuild',
-  version,
+  version: EsbuildAPI.version,
   pkgName: 'esbuild-wasm',
   configFile: 'esbuild.config.js',
+  api: EsbuildAPI,
   async init() {
-    await initialize({ wasmURL })
+    await EsbuildAPI.initialize({ wasmURL })
   },
   async build(files, entries, options: BuildOptions) {
-    const bundle = await build<BuildOptions>({
+    const bundle = await EsbuildAPI.build<BuildOptions>({
       entryPoints: entries,
       bundle: true,
       format: 'esm',
@@ -59,7 +54,7 @@ export const esbuild: Bundler<undefined> = {
     const output = Object.fromEntries(
       bundle.outputFiles!.map((file) => [file.path.slice(1), file.text]),
     )
-    const warnings = await formatMessages(bundle.warnings, {
+    const warnings = await EsbuildAPI.formatMessages(bundle.warnings, {
       kind: 'warning',
       color: false,
       terminalWidth: 1000,

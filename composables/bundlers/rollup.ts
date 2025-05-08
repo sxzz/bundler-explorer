@@ -1,6 +1,6 @@
 // @ts-expect-error missing types
 import { transform as oxcTransform } from '@oxc-transform/binding-wasm32-wasi'
-import { rollup as build, VERSION as version } from '@rollup/browser'
+import * as RollupAPI from '@rollup/browser'
 import { resolve } from 'pathe'
 import type { Bundler } from './index'
 
@@ -10,13 +10,14 @@ export const rollup: Bundler = {
   id: 'rollup',
   name: 'Rollup',
   icon: 'i-logos:rollupjs',
-  version,
+  version: RollupAPI.VERSION,
   pkgName: '@rollup/browser',
   configFile: 'rollup.config.js',
+  api: RollupAPI,
   async build(files, input, config) {
     const warnings: string[] = []
 
-    const bundle = await build({
+    const bundle = await RollupAPI.rollup({
       input,
       onLog(level, log, logger) {
         if (level === 'warn') {

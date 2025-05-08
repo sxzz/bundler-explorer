@@ -12,6 +12,7 @@ export const rollup: Bundler = {
   icon: 'i-logos:rollupjs',
   version,
   pkgName: '@rollup/browser',
+  configFile: 'rollup.config.js',
   async build(files, input, config) {
     const warnings: string[] = []
 

@@ -1,20 +1,26 @@
 <script setup lang="ts">
 import ansis from 'ansis'
-import { bundlers, type TransformResult } from '~/composables/bundlers'
-import { currentBundlerId, files, timeCost } from '~/state/bundler'
+import {
+  currentBundler,
+  currentBundlerId,
+  files,
+  timeCost,
+} from '~/state/bundler'
+import type { TransformResult } from '~/composables/bundlers'
 
 const { data, status, error, refresh } = useAsyncData(
   '',
   async (): Promise<TransformResult> => {
-    const bundler = bundlers[currentBundlerId.value]
+    const bundler = currentBundler.value
     let context: any
     if (!bundler.initted && bundler.init) {
       context = await bundler.init()
       bundler.initted = true
     }
-    const configCode = files.value.get('_config.js')?.code
-    let configObject: any = {}
 
+    let configObject: any = {}
+    const configCode =
+      bundler.configFile && files.value.get(bundler.configFile)?.code
     let configUrl: string | undefined
     if (configCode) {
       configUrl = URL.createObjectURL(
@@ -23,6 +29,7 @@ const { data, status, error, refresh } = useAsyncData(
       const mod = await import(/* @vite-ignore */ configUrl)
       configObject = mod.default || mod
     }
+
     const entries = Array.from(files.value.entries())
       .filter(([, file]) => file.isEntry)
       .map(([name]) => `/${name}`)

@@ -10,10 +10,13 @@ export interface Bundler<T = void> {
   icon: string
   pkgName: string
   version: string
-  webContainer?: boolean
+  // webContainer?: boolean
 
   init?: () => Awaitable<T>
   initted?: boolean
+
+  configFile?: string
+
   build: (
     this: T,
     files: FileMap,

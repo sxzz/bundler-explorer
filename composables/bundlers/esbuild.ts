@@ -18,6 +18,7 @@ export const esbuild: Bundler<undefined> = {
   icon: 'i-logos:esbuild',
   version,
   pkgName: 'esbuild-wasm',
+  configFile: 'esbuild.config.js',
   async init() {
     await initialize({ wasmURL })
   },

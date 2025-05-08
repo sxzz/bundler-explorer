@@ -10,6 +10,7 @@ export const rolldown: Bundler = {
   icon: 'i-vscode-icons:file-type-rolldown',
   version,
   pkgName: '@rolldown/browser',
+  configFile: 'rolldown.config.js',
   async build(files, input, options) {
     const warnings: string[] = []
 

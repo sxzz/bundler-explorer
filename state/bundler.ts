@@ -11,11 +11,15 @@ export type FileMap = Map<string, File>
 export const codeTemplate = 'export const foo = 42'
 export const configTemplate = `export default {}`
 
+export const CONFIG_FILES = Object.values(bundlers)
+  .map((b) => b.configFile)
+  .filter((v): v is string => !!v)
+
 export const DEFAULT_ENTRY = 'index.ts'
 export const defaultFiles = () =>
   new Map([
     [DEFAULT_ENTRY, new File(codeTemplate, true)],
-    ['_config.js', new File(configTemplate)],
+    [CONFIG_FILES[0], new File(configTemplate)],
   ])
 
 export const files = ref<FileMap>(defaultFiles())

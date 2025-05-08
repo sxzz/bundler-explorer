@@ -31,8 +31,8 @@ const options = computed(() => ({
 watch(options, () => editor?.updateOptions(options.value))
 
 watch(modelValue, () => {
-  if (editor?.getValue() !== modelValue.value) {
-    editor?.setValue(modelValue.value)
+  if (model.value.getValue() !== modelValue.value) {
+    model.value.setValue(modelValue.value)
   }
 })
 
@@ -47,6 +47,7 @@ const model = computedWithControl(
 )
 watch(model, () => {
   editor?.setModel(model.value)
+  modelValue.value = model.value.getValue()
 })
 
 watch(editorElement, (newValue, oldValue) => {

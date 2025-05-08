@@ -27,7 +27,7 @@ export const esbuild: Bundler<undefined> = {
       entryPoints: entries,
       bundle: true,
       format: 'esm',
-      outdir: 'dist',
+      outdir: '.',
       ...options,
       plugins: [
         {

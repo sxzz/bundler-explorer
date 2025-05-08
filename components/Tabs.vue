@@ -18,6 +18,16 @@ const active = defineModel<string>({
   },
 })
 
+watch(
+  [active, () => tabs],
+  () => {
+    if (!tabs.includes(active.value)) {
+      active.value = tabs[0]
+    }
+  },
+  { deep: true },
+)
+
 const renamingTab = ref<string>()
 const renameInput = ref('')
 const renameInputRef = useTemplateRef<HTMLInputElement[]>('rename-input')

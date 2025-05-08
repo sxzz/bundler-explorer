@@ -51,6 +51,9 @@ function setEntry(name: string) {
           :model-value="files.get(value)!.code"
           language="typescript"
           input
+          h-full
+          min-h-0
+          w-full
           @update:model-value="updateCode(value, $event)"
         />
       </template>

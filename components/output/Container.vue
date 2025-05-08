@@ -18,6 +18,10 @@ const { data, status, error, refresh } = useAsyncData(
       bundler.initted = true
     }
 
+    const entries = Array.from(files.value.entries())
+      .filter(([, file]) => file.isEntry)
+      .map(([name]) => `/${name}`)
+
     let configObject: any = {}
     const configCode =
       bundler.configFile && files.value.get(bundler.configFile)?.code
@@ -28,11 +32,14 @@ const { data, status, error, refresh } = useAsyncData(
       )
       const mod = await import(/* @vite-ignore */ configUrl)
       configObject = mod.default || mod
+      if (typeof configObject === 'function') {
+        configObject = configObject({
+          files: files.value,
+          entries,
+          api: bundler.api,
+        })
+      }
     }
-
-    const entries = Array.from(files.value.entries())
-      .filter(([, file]) => file.isEntry)
-      .map(([name]) => `/${name}`)
 
     const startTime = performance.now()
 
@@ -52,15 +59,12 @@ const { data, status, error, refresh } = useAsyncData(
   { server: false, deep: false },
 )
 
-watch(status, (newStatus) => {
-  if (newStatus === 'pending') {
-    timeCost.value = undefined
-  }
-})
-
 watch([files, currentBundlerId], () => refresh(), {
   deep: true,
 })
+
+const isLoading = computed(() => status.value === 'pending')
+const isLoadingDebounced = useDebounce(isLoading, 100)
 
 const tabs = computed(() => Object.keys(data.value?.output || {}))
 
@@ -85,9 +89,9 @@ const errorText = computed(() => {
 
 <template>
   <div h-full flex flex-col gap2>
-    <Loading v-if="status === 'pending'" />
+    <Loading v-if="isLoading && isLoadingDebounced" />
     <div
-      v-else-if="status === 'error'"
+      v-if="status === 'error'"
       overflow-auto
       whitespace-pre
       text-sm
@@ -96,7 +100,7 @@ const errorText = computed(() => {
       v-text="errorText"
     />
     <Tabs
-      v-if="status === 'success'"
+      v-else-if="status === 'success' || status === 'pending'"
       v-slot="{ value }"
       :tabs
       readonly
@@ -105,7 +109,6 @@ const errorText = computed(() => {
       flex-1
     >
       <CodeEditor
-        v-show="status === 'success'"
         :model-value="data?.output[value] || ''"
         language="javascript"
         readonly

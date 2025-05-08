@@ -10,6 +10,7 @@ export interface Bundler<T = void> {
   icon: string
   pkgName: string
   version: string
+  api?: any
   // webContainer?: boolean
 
   init?: () => Awaitable<T>

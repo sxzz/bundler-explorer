@@ -37,35 +37,37 @@ function resetState() {
       <BundlerSelect />
     </div>
 
-    <div
-      v-if="timeCost != null"
-      flex
-      items-center
-      gap1
-      text-sm
-      font-mono
-      title="Last build time"
-    >
-      <div i-ri:time-line op60 />
-      <span op80>{{ timeCost }}ms</span>
-    </div>
-
     <div flex="~ center" gap1>
-      <a
-        :href="`https://npmjs.com/package/${currentBundler.pkgName}/v/${currentBundler.version}`"
-        target="_blank"
-        flex
-        items-center
-        gap1
-        text-sm
-        font-mono
-        :title="`${currentBundler.pkgName}@${currentBundler.version}`"
-      >
-        <div :class="currentBundler.icon" />
-        <div op80>
-          {{ currentBundler.pkgName }}@{{ currentBundler.version }}
+      <div flex="~ center" gap2>
+        <div
+          v-if="timeCost != null"
+          flex
+          items-center
+          gap1
+          text-sm
+          font-mono
+          title="Time Cost"
+        >
+          <div i-ri:time-line op60 />
+          <span op80>{{ timeCost }}ms</span>
         </div>
-      </a>
+
+        <a
+          :href="`https://npmjs.com/package/${currentBundler.pkgName}/v/${currentBundler.version}`"
+          target="_blank"
+          flex
+          items-center
+          gap1
+          text-sm
+          font-mono
+          :title="`${currentBundler.pkgName}@${currentBundler.version}`"
+        >
+          <div :class="currentBundler.icon" />
+          <div op80>
+            {{ currentBundler.pkgName }}@{{ currentBundler.version }}
+          </div>
+        </a>
+      </div>
 
       <button title="Reset State" nav-button @click="resetState">
         <div i-ri:refresh-line />

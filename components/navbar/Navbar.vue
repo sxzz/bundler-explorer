@@ -22,10 +22,11 @@ function resetState() {
     )
   ) {
     monaco!.editor.getModels().forEach((model) => {
+      if (model.uri.authority === 'model') return
       model.dispose()
     })
-    activeFile.value = DEFAULT_ENTRY
     files.value = defaultFiles()
+    activeFile.value = DEFAULT_ENTRY
   }
 }
 </script>

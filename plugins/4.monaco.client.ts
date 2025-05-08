@@ -22,12 +22,13 @@ export default defineNuxtPlugin(() => {
 
   monaco.editor.registerEditorOpener({
     openCodeEditor(_, resource) {
-      let path = resource.toString()
-      if (!path.startsWith('inmemory:/')) return false
-
-      path = path.slice('inmemory:/'.length)
-      if (!files.value.has(path)) return false
-
+      if (resource.scheme !== 'file' || resource.path[0] !== '/') {
+        return false
+      }
+      const path = resource.path.slice(1)
+      if (!files.value.has(path)) {
+        return false
+      }
       activeFile.value = path
       return true
     },

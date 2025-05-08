@@ -54,7 +54,7 @@ export interface SourceFile {
 export type SourceFileMap = Map<string, SourceFile>
 
 function createModel(filename: string, code: string) {
-  const uri = markRaw(monaco.Uri.parse(`inmemory:///${filename}`))
+  const uri = markRaw(monaco.Uri.file(filename))
   const language = 'typescript'
 
   const existing = monaco.editor.getModel(uri)

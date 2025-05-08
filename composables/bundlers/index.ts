@@ -19,7 +19,7 @@ export interface Bundler<T = void> {
 
   build: (
     this: T,
-    files: FileMap,
+    files: SourceFileMap,
     entries: string[],
     config: any,
   ) => Awaitable<TransformResult>

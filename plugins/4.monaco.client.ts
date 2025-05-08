@@ -13,6 +13,7 @@ export default defineNuxtPlugin(() => {
     target: monaco.languages.typescript.ScriptTarget.ESNext,
     module: monaco.languages.typescript.ModuleKind.ESNext,
     allowNonTsExtensions: true,
+    allowImportingTsExtensions: true,
     moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
     noEmit: true,
     esModuleInterop: true,

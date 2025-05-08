@@ -24,6 +24,7 @@ function renameTab(oldName: string, newName: string) {
 }
 
 function removeTab(name: string) {
+  files.value.get(name)?.dispose()
   files.value.delete(name)
 }
 

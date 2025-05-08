@@ -20,6 +20,9 @@ export function useSourceFile(
       this.model.dispose()
       this.model = model
     },
+    dispose() {
+      this.model.dispose()
+    },
     toJSON() {
       return {
         n: this.filename,
@@ -44,6 +47,7 @@ export interface SourceFile {
   model: Raw<monaco.editor.ITextModel>
 
   rename: (newName: string) => void
+  dispose: () => void
   toJSON: () => object
 }
 

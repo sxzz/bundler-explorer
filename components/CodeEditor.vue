@@ -23,6 +23,8 @@ let editor: monaco.editor.IStandaloneCodeEditor
 
 const options = computed(() => ({
   ...getSharedMonacoOptions(),
+  fontSize: 13,
+  fontLigatures: true,
   readOnly: props.readonly,
   ...props.options,
 }))

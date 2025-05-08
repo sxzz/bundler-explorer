@@ -12,6 +12,7 @@ import {
 import BundlerSelect from './BundlerSelect.vue'
 
 const { branch } = useAppConfig()
+const monaco = useMonaco()
 
 function resetState() {
   if (
@@ -20,6 +21,9 @@ function resetState() {
       'Are you sure you want to reset the code and config to their default values?',
     )
   ) {
+    monaco!.editor.getModels().forEach((model) => {
+      model.dispose()
+    })
     activeFile.value = DEFAULT_ENTRY
     files.value = defaultFiles()
   }

@@ -1,3 +1,5 @@
+import { activeFile, files } from '~/state/bundler'
+
 export default defineNuxtPlugin(() => {
   const monaco = useMonaco()!
 
@@ -15,5 +17,18 @@ export default defineNuxtPlugin(() => {
     noEmit: true,
     esModuleInterop: true,
     jsx: monaco.languages.typescript.JsxEmit.Preserve,
+  })
+
+  monaco.editor.registerEditorOpener({
+    openCodeEditor(_, resource) {
+      let path = resource.toString()
+      if (!path.startsWith('inmemory:/')) return false
+
+      path = path.slice('inmemory:/'.length)
+      if (!files.value.has(path)) return false
+
+      activeFile.value = path
+      return true
+    },
   })
 })

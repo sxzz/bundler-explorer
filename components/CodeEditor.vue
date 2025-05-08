@@ -1,34 +1,75 @@
-<script setup lang="ts">
-import type { MonacoLanguage } from '#imports'
-import type * as Monaco from 'monaco-editor'
+<script lang="ts" setup>
+import * as monaco from 'monaco-editor'
 
-const props = defineProps<{
-  language: MonacoLanguage
-  readonly?: boolean
-}>()
-const code = defineModel<string>({ required: true })
-
-const container = shallowRef<{
-  $editor: Monaco.editor.IStandaloneCodeEditor | undefined
-}>()
-
-const options = computed<Monaco.editor.IStandaloneEditorConstructionOptions>(
-  () => ({
-    ...getSharedMonacoOptions(),
-    fontSize: 14,
-    fontLigatures: true,
-    readOnly: props.readonly,
-  }),
+const modelValue = defineModel<string>({ default: '' })
+const props = withDefaults(
+  defineProps<{
+    language?: string
+    options?: monaco.editor.IStandaloneEditorConstructionOptions
+    model?: monaco.editor.ITextModel
+    readonly?: boolean
+  }>(),
+  {
+    language: () => 'plaintext',
+    options: () => ({}),
+  },
 )
+
+const isLoading = ref(true)
+const editorRef = shallowRef<monaco.editor.IStandaloneCodeEditor>()
+const editorElement = useTemplateRef<HTMLDivElement>('editorElement')
+
+let editor: monaco.editor.IStandaloneCodeEditor
+
+const options = computed(() => ({
+  ...getSharedMonacoOptions(),
+  readOnly: props.readonly,
+  ...props.options,
+}))
+watch(options, () => editor?.updateOptions(options.value))
+
+watch(modelValue, () => {
+  if (editor?.getValue() !== modelValue.value) {
+    editor?.setValue(modelValue.value)
+  }
+})
+
+const model = computedWithControl(
+  () => [props.model, props.language],
+  () => {
+    return (
+      props.model ||
+      markRaw(monaco.editor.createModel(modelValue.value, props.language))
+    )
+  },
+)
+watch(model, () => {
+  editor?.setModel(model.value)
+})
+
+watch(editorElement, (newValue, oldValue) => {
+  if (!newValue || oldValue) return
+
+  editor = monaco.editor.create(newValue, options.value)
+  editorRef.value = editor
+  editor.layout()
+  editor.setModel(model.value)
+  editor.onDidChangeModelContent(() => {
+    modelValue.value = editor.getValue()
+  })
+  isLoading.value = false
+})
+
+defineExpose({
+  /**
+   * Monaco editor instance
+   */
+  $editor: editorRef,
+})
 </script>
 
 <template>
-  <MonacoEditor
-    ref="container"
-    v-model="code"
-    :lang="language"
-    :options="options"
-  >
-    <Loading />
-  </MonacoEditor>
+  <div ref="editorElement">
+    <Loading v-if="isLoading" />
+  </div>
 </template>

@@ -15,6 +15,7 @@ function renameTab(oldName: string, newName: string) {
   files.value = new Map(
     Array.from(files.value.entries()).map(([key, value]) => {
       if (key === oldName) {
+        value.rename(newName)
         return [newName, value]
       }
       return [key, value]
@@ -49,7 +50,8 @@ function setEntry(name: string) {
       <template #default="{ value }">
         <CodeEditor
           :model-value="files.get(value)!.code"
-          language="typescript"
+          :model="files.get(value)!.model"
+          :uri="files.get(value)!.uri"
           input
           h-full
           min-h-0

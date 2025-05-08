@@ -1,4 +1,4 @@
-import { defaultFiles, File, files } from './bundler'
+import { defaultFiles, files } from './bundler'
 import { STORAGE_PREFIX } from './constants'
 
 const LAST_STATE_KEY = `${STORAGE_PREFIX}last-state`
@@ -12,9 +12,9 @@ export function initUrlState() {
   }
 
   files.value = new Map(
-    Object.entries((state?.f || {}) as Record<string, File>).map(([k, v]) => [
+    Object.entries((state?.f || {}) as SourceFileMap).map(([k, v]) => [
       k,
-      new File(v.code, v.isEntry),
+      useSourceFileFromJSON(v),
     ]),
   )
   if (files.value.size === 0) {

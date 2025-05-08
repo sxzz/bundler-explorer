@@ -1,4 +1,3 @@
-import type { FileMap } from '~/state/bundler'
 import { esbuild } from './esbuild'
 import { rolldown } from './rolldown'
 import { rollup } from './rollup'

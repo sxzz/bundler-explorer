@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { activeFile, CONFIG_FILES, File, files } from '~/state/bundler'
+import { activeFile, CONFIG_FILES, files } from '~/state/bundler'
 
 const tabs = computed(() => Array.from(files.value.keys()))
 
@@ -8,7 +8,7 @@ function updateCode(name: string, code: string) {
 }
 
 function addTab(name: string) {
-  files.value.set(name, new File(''))
+  files.value.set(name, useSourceFile(name, ''))
 }
 
 function renameTab(oldName: string, newName: string) {

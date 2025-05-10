@@ -1,5 +1,6 @@
 import { rolldown as build, VERSION as version } from '@rolldown/browser'
 import * as RolldownAPI from '@rolldown/browser'
+import * as RolldownExperimentalAPI from '@rolldown/browser/experimental'
 import { resolve } from 'pathe'
 // @ts-expect-error missing types
 import * as RolldownBinding from '../../node_modules/@rolldown/browser/dist/rolldown-binding.wasi-browser'
@@ -16,6 +17,7 @@ export const rolldown: Bundler = {
   configFile: 'rolldown.config.js',
   api: {
     ...RolldownAPI,
+    experimental: RolldownExperimentalAPI,
     _binding: RolldownBinding,
   },
   async build(files, input, options) {

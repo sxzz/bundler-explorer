@@ -13,9 +13,6 @@ importers:
 
   .:
     dependencies:
-      '@oxc-transform/binding-wasm32-wasi':
-        specifier: ^0.69.0
-        version: 0.69.0
       '@rolldown/browser':
         specifier: nightly
         version: 1.0.0-beta.8-commit.e5c11c6
@@ -725,11 +722,6 @@ packages:
 
   '@oxc-project/types@0.68.1':
     resolution: {integrity: sha512-Q/H52+HXPPxuIHwQnVkEM8GebLnNcokkI4zQQdbxLIZdfxMGhAm9+gEqsMku3t95trN/1titHUmCM9NxbKaE2g==}
-
-  '@oxc-transform/binding-wasm32-wasi@0.69.0':
-    resolution: {integrity: sha512-sl9eaSOhIavXOElohk/wEQTw1aLxOALep7ypBbBtMaag/Jbbf9u9YvvGYqDlkTAJwYuB3DkM6vfH2WBXdoiWhw==}
-    engines: {node: '>=14.0.0'}
-    cpu: [wasm32]
 
   '@parcel/watcher-android-arm64@2.5.1':
     resolution: {integrity: sha512-KF8+j9nNbUN8vzOFDpRMsaKBHZ/mcjEjMToVMJOhTozkDonQFFrRcfdLWn6yWKCmJKmdVxSgHiYvTCef4/qcBA==}
@@ -6188,10 +6180,6 @@ snapshots:
     optional: true
 
   '@oxc-project/types@0.68.1': {}
-
-  '@oxc-transform/binding-wasm32-wasi@0.69.0':
-    dependencies:
-      '@napi-rs/wasm-runtime': 0.2.9(patch_hash=2208d1087396aa64af48f49601d2536383c774da4e04d62ee191591748532cb3)
 
   '@parcel/watcher-android-arm64@2.5.1':
     optional: true

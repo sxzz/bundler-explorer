@@ -1,2 +1,0 @@
-patchedDependencies:
-  '@napi-rs/wasm-runtime': patches/@napi-rs__wasm-runtime.patch

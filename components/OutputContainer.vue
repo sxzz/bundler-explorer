@@ -74,6 +74,7 @@ const errorText = computed(() => {
   let stack: string | undefined
   if (error.value instanceof Error) {
     stack = error.value.stack
+    stack &&= ansis.strip(stack)
     if (isSafari)
       stack = stack
         ?.split('\n')

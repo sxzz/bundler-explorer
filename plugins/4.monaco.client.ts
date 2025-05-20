@@ -18,6 +18,7 @@ export default defineNuxtPlugin(() => {
     noEmit: true,
     esModuleInterop: true,
     jsx: monaco.languages.typescript.JsxEmit.Preserve,
+    resolveJsonModule: true,
   })
 
   monaco.editor.registerEditorOpener({

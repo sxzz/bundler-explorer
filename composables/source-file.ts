@@ -55,7 +55,7 @@ export type SourceFileMap = Map<string, SourceFile>
 
 function createModel(filename: string, code: string) {
   const uri = markRaw(monaco.Uri.file(filename))
-  const language = 'typescript'
+  const language = filename.endsWith('.json') ? 'json' : 'typescript'
 
   const existing = monaco.editor.getModel(uri)
   if (existing) {

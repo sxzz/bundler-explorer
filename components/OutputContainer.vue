@@ -31,6 +31,7 @@ const { data, status, error, refresh } = useAsyncData(
         new Blob([configCode || ''], { type: 'text/javascript' }),
       )
       const mod = await import(/* @vite-ignore */ configUrl)
+      URL.revokeObjectURL(configUrl)
       configObject = mod.default || mod
       if (typeof configObject === 'function') {
         configObject = configObject({
@@ -53,7 +54,6 @@ const { data, status, error, refresh } = useAsyncData(
       return result
     } finally {
       timeCost.value = Math.round(performance.now() - startTime)
-      if (configUrl) URL.revokeObjectURL(configUrl)
     }
   },
   { server: false, deep: false },

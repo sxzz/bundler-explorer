@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@rolldown/browser": "nightly",
-    "@rollup/browser": "^4.40.2",
+    "@rollup/browser": "^4.41.0",
     "@shikijs/monaco": "^3.4.2",
     "@vueuse/core": "^13.2.0",
     "@webcontainer/api": "^1.6.1",

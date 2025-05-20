@@ -20,10 +20,10 @@ export const rolldown: Bundler = {
     experimental: RolldownExperimentalAPI,
     _binding: RolldownBinding,
   },
-  async build(files, input, options) {
+  async build(files, input, config) {
     const warnings: string[] = []
 
-    const bundle = await build({
+    const inputOptions: RolldownAPI.InputOptions = {
       input,
       cwd: '/',
       onLog(level, log, logger) {
@@ -33,7 +33,7 @@ export const rolldown: Bundler = {
           logger(level, log)
         }
       },
-      ...options,
+      ...config,
       plugins: [
         {
           name: 'bundler-explorer:fs',
@@ -50,13 +50,18 @@ export const rolldown: Bundler = {
             }
           },
         },
-        options?.plugins,
+        config?.plugins,
       ],
-    })
-    const result = await bundle.generate({
+    }
+    const outputOptions: RolldownAPI.OutputOptions = {
       format: 'esm',
-      ...options?.output,
-    })
+      ...config?.output,
+    }
+    console.info('Rolldown input options', inputOptions)
+    console.info('Rolldown output options', outputOptions)
+
+    const bundle = await build(inputOptions)
+    const result = await bundle.generate(outputOptions)
     const output = Object.fromEntries(
       result.output.map((chunk) =>
         chunk.type === 'chunk'

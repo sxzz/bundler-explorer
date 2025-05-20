@@ -17,13 +17,13 @@ export const esbuild: Bundler<undefined> = {
   async init() {
     await EsbuildAPI.initialize({ wasmURL })
   },
-  async build(files, entries, options: BuildOptions) {
-    const bundle = await EsbuildAPI.build<BuildOptions>({
+  async build(files, entries, config: BuildOptions) {
+    const options: BuildOptions = {
       entryPoints: entries,
       bundle: true,
       format: 'esm',
       outdir: '.',
-      ...options,
+      ...config,
       plugins: [
         {
           name: 'bundler-explorer:fs',
@@ -47,10 +47,11 @@ export const esbuild: Bundler<undefined> = {
             })
           },
         },
-        ...(options?.plugins || []),
+        ...(config?.plugins || []),
       ],
       write: false,
-    })
+    }
+    const bundle = await EsbuildAPI.build<BuildOptions>(options)
     const output = Object.fromEntries(
       bundle.outputFiles!.map((file) => [file.path.slice(1), file.text]),
     )

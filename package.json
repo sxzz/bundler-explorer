@@ -20,7 +20,7 @@
     "@shikijs/monaco": "^3.4.2",
     "@vueuse/core": "^13.3.0",
     "@webcontainer/api": "^1.6.1",
-    "ansis": "^4.0.0",
+    "ansis": "^4.1.0",
     "birpc": "^2.3.0",
     "esbuild-wasm": "^0.25.5",
     "fflate": "^0.8.2",
@@ -29,7 +29,7 @@
     "pathe": "^2.0.3",
     "shiki": "^3.4.2",
     "theme-vitesse": "^0.8.3",
-    "vue": "^3.5.15"
+    "vue": "^3.5.16"
   },
   "devDependencies": {
     "@iconify-json/logos": "^1.2.4",

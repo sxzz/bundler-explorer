@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@rolldown/browser':
-        specifier: nightly
-        version: 1.0.0-beta.10-commit.ac4e5db
+        specifier: https://pkg.pr.new/@rolldown/browser@c7d1545
+        version: https://pkg.pr.new/@rolldown/browser@c7d1545
       '@rollup/browser':
         specifier: ^4.41.1
         version: 4.41.1
@@ -869,15 +869,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@oxc-project/runtime@0.72.1':
-    resolution: {integrity: sha512-8nU/WPeJWF6QJrT8HtEEIojz26bXn677deDX8BDVpjcz97CVKORVAvFhE2/lfjnBYE0+aqmjFeD17YnJQpCyqg==}
-    engines: {node: '>=6.9.0'}
-
   '@oxc-project/types@0.68.1':
     resolution: {integrity: sha512-Q/H52+HXPPxuIHwQnVkEM8GebLnNcokkI4zQQdbxLIZdfxMGhAm9+gEqsMku3t95trN/1titHUmCM9NxbKaE2g==}
-
-  '@oxc-project/types@0.72.1':
-    resolution: {integrity: sha512-qlvcDuCjISt4W7Izw0i5+GS3zCKJLXkoNDEc+E4ploage35SlZqxahpdKbHDX8uD70KDVNYWtupsHoNETy5kPQ==}
 
   '@parcel/watcher-android-arm64@2.5.1':
     resolution: {integrity: sha512-KF8+j9nNbUN8vzOFDpRMsaKBHZ/mcjEjMToVMJOhTozkDonQFFrRcfdLWn6yWKCmJKmdVxSgHiYvTCef4/qcBA==}
@@ -997,8 +990,9 @@ packages:
     resolution: {integrity: sha512-G0OnZbMWEs5LhDyqy2UL17vGhSVHkQIfVojMtEWVenvj0V5S84VBgy86kJIuNsGDp2p7sTKlpSIpBUWdC35OKg==}
     engines: {node: '>=20.0.0'}
 
-  '@rolldown/browser@1.0.0-beta.10-commit.ac4e5db':
-    resolution: {integrity: sha512-O0twBwdNmE4f95yp7FjXVkS5qRyi3/q0qOHcRiyZGzCvBPiM2A/QFxHCzMLeTzOFH6uc4xkPAvFMIe8P32Vtag==}
+  '@rolldown/browser@https://pkg.pr.new/@rolldown/browser@c7d1545':
+    resolution: {tarball: https://pkg.pr.new/@rolldown/browser@c7d1545}
+    version: 1.0.0-beta.10-commit.c7d1545
     hasBin: true
 
   '@rolldown/pluginutils@1.0.0-beta.10':
@@ -6103,11 +6097,7 @@ snapshots:
   '@oxc-parser/binding-win32-x64-msvc@0.68.1':
     optional: true
 
-  '@oxc-project/runtime@0.72.1': {}
-
   '@oxc-project/types@0.68.1': {}
-
-  '@oxc-project/types@0.72.1': {}
 
   '@parcel/watcher-android-arm64@2.5.1':
     optional: true
@@ -6199,13 +6189,9 @@ snapshots:
     dependencies:
       quansync: 0.2.10
 
-  '@rolldown/browser@1.0.0-beta.10-commit.ac4e5db':
+  '@rolldown/browser@https://pkg.pr.new/@rolldown/browser@c7d1545':
     dependencies:
       '@napi-rs/wasm-runtime': 0.2.10
-      '@oxc-project/runtime': 0.72.1
-      '@oxc-project/types': 0.72.1
-      ansis: 4.1.0
-      pathe: 2.0.3
 
   '@rolldown/pluginutils@1.0.0-beta.10': {}
 

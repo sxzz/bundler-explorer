@@ -15,7 +15,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@rolldown/browser": "nightly",
+    "@rolldown/browser": "https://pkg.pr.new/@rolldown/browser@c7d1545",
     "@rollup/browser": "^4.41.1",
     "@shikijs/monaco": "^3.4.2",
     "@vueuse/core": "^13.3.0",

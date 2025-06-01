@@ -6,7 +6,12 @@ const crossOriginHeaders = {
 }
 
 export default defineNuxtConfig({
-  modules: ['@unocss/nuxt', '@vueuse/nuxt', 'nuxt-monaco-editor'],
+  modules: [
+    '@unocss/nuxt',
+    '@vueuse/nuxt',
+    'nuxt-monaco-editor',
+    '@nuxtjs/plausible',
+  ],
   vite: {
     build: {
       target: 'esnext',
@@ -51,5 +56,9 @@ export default defineNuxtConfig({
   },
   appConfig: {
     branch: process.env.VERCEL_GIT_COMMIT_REF,
+  },
+  plausible: {
+    domain: 'bundler.sxzz.dev',
+    apiHost: 'https://evt.sxzz.dev',
   },
 })

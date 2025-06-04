@@ -6,6 +6,9 @@ const crossOriginHeaders = {
 }
 
 export default defineNuxtConfig({
+  future: {
+    compatibilityVersion: 4,
+  },
   modules: [
     '@unocss/nuxt',
     '@vueuse/nuxt',
@@ -51,9 +54,6 @@ export default defineNuxtConfig({
     '~/styles/vars.css',
     '~/styles/global.css',
   ],
-  imports: {
-    dirs: ['./composables', './utils'],
-  },
   appConfig: {
     branch: process.env.VERCEL_GIT_COMMIT_REF,
   },

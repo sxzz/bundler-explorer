@@ -22,7 +22,7 @@ watch(
   [active, () => tabs],
   () => {
     if (!tabs.includes(active.value)) {
-      active.value = tabs[0]
+      active.value = tabs[0]!
     }
   },
   { deep: true },
@@ -72,7 +72,7 @@ function removeTab(name: string) {
   if (tabs.length <= 1) return
   emit('removeTab', name)
   if (active.value === name) {
-    active.value = tabs[0]
+    active.value = tabs[0]!
   }
 }
 

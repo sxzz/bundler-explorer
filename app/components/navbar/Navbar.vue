@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { version } from '~~/package.json'
 import { toggleDark } from '~/composables/dark'
-import { version } from '~/package.json'
 import {
   activeFile,
   currentBundler,

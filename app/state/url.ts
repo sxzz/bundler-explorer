@@ -1,4 +1,4 @@
-import { defaultFiles, files } from './bundler'
+import { currentBundlerId, defaultFiles, files } from './bundler'
 import { STORAGE_PREFIX } from './constants'
 
 const LAST_STATE_KEY = `${STORAGE_PREFIX}last-state`
@@ -20,11 +20,14 @@ export function initUrlState() {
   if (files.value.size === 0) {
     files.value = new Map(defaultFiles())
   }
+  if (state.b) {
+    currentBundlerId.value = state.b
+  }
 
   // serialize state to url
   watchEffect(() => {
     const f = Object.fromEntries(files.value)
-    const serialized = JSON.stringify({ f })
+    const serialized = JSON.stringify({ f, b: currentBundlerId.value })
     location.hash = utoa(serialized)
     localStorage.setItem(LAST_STATE_KEY, serialized)
   })

@@ -7,10 +7,7 @@ export const CONFIG_FILES = Object.values(bundlers)
   .map((b) => b.configFile)
   .filter((v): v is string => !!v)
 
-export const currentBundlerId = useLocalStorage<BundlerName>(
-  'current-bundler',
-  'rolldown',
-)
+export const currentBundlerId = ref<BundlerName>('rolldown')
 export const currentBundler = computed(() => bundlers[currentBundlerId.value])
 
 export const DEFAULT_ENTRY = 'index.ts'

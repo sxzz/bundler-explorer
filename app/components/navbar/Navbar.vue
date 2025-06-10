@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { version } from '~~/package.json'
+import * as monaco from 'monaco-editor'
 import { toggleDark } from '~/composables/dark'
 import {
   activeFile,
@@ -12,7 +13,6 @@ import {
 import BundlerSelect from './BundlerSelect.vue'
 
 const { branch } = useAppConfig()
-const monaco = useMonaco()
 
 function resetState() {
   if (

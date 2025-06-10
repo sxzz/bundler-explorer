@@ -9,7 +9,7 @@ export const CONFIG_FILES = Object.values(bundlers)
 
 export const currentBundlerId = useLocalStorage<BundlerName>(
   'current-bundler',
-  'rollup',
+  'rolldown',
 )
 export const currentBundler = computed(() => bundlers[currentBundlerId.value])
 

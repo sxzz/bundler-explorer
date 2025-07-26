@@ -11,8 +11,8 @@ import { showPanel } from '~/state/panel'
     right-4
     z-panel
     rounded-full
-    shadow
     bg-glass
+    shadow
   >
     <button
       h-10

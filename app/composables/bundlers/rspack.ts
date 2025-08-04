@@ -37,7 +37,14 @@ export const rspack: Bundler = {
           return reject(new Error('REPL: Rspack output path is not found'))
         }
 
-        const output = builtinMemFs.volume.toJSON(dist)
+        const output = Object.fromEntries(
+          Object.entries(builtinMemFs.volume.toJSON(dist)).map(
+            ([filePath, content]) => [
+              filePath.replace(`${dist}/`, ''),
+              content as string,
+            ],
+          ),
+        )
         const statsJson = stats.toJson({
           all: false,
           warnings: true,

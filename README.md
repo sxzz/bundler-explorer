@@ -13,7 +13,6 @@
   - esbuild (transform & build mode)
   - Vite ([WebContainers](https://webcontainers.io/))
   - Webpack ([WebContainers](https://webcontainers.io/))
-  - Rspack (needs https://github.com/web-infra-dev/rspack/pull/9134)
 - Diff
 - Version Switching
 - Download as a zip
@@ -24,3 +23,4 @@
 - https://esbuild.egoist.dev/
 - https://esbuild.github.io/try
 - https://rollupjs.org/repl
+- https://repl.rspack.rs/

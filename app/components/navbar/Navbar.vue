@@ -42,7 +42,7 @@ function resetState() {
       <BundlerSelect />
     </div>
 
-    <div flex="~ center" gap1>
+    <div flex="~ center" gap2>
       <div flex="~ center" gap2>
         <div
           v-if="timeCost != null"

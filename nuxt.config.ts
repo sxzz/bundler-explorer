@@ -20,8 +20,8 @@ export default defineNuxtConfig({
       target: 'esnext',
     },
     optimizeDeps: {
-      include: ['ansis'],
-      exclude: ['@rollup/browser', '@rolldown/browser'],
+      include: ['ansis', '@rspack/browser > @rspack/lite-tapable'],
+      exclude: ['@rollup/browser', '@rolldown/browser', '@rspack/browser'],
     },
     server: {
       headers: crossOriginHeaders,

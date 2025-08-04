@@ -1,6 +1,7 @@
 import { esbuild } from './esbuild'
 import { rolldown } from './rolldown'
 import { rollup } from './rollup'
+import { rspack } from './rspack'
 
 export type Awaitable<T> = T | Promise<T>
 export interface Bundler<T = void> {
@@ -30,5 +31,5 @@ export interface TransformResult {
   warnings?: string[]
 }
 
-export const bundlers = { rollup, rolldown, esbuild }
+export const bundlers = { rollup, rolldown, esbuild, rspack }
 export type BundlerName = keyof typeof bundlers

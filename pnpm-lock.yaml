@@ -17,6 +17,9 @@ importers:
       '@rollup/browser':
         specifier: ^4.46.2
         version: 4.46.2
+      '@rspack/browser':
+        specifier: npm:@rspack-canary/browser@1.4.12-canary-4f117639-20250801102630
+        version: '@rspack-canary/browser@1.4.12-canary-4f117639-20250801102630'
       '@shikijs/monaco':
         specifier: ^3.9.2
         version: 3.9.2
@@ -1493,6 +1496,18 @@ packages:
     resolution: {integrity: sha512-CvUo2ixeIQGtF6WvuB87XWqPQkoFAFqW+HUo/WzHwuHDvIwZCtjdWXoYCcr06iKGydiqTclC4jU/TNObC/xKZg==}
     cpu: [x64]
     os: [win32]
+
+  '@rspack-canary/browser@1.4.12-canary-4f117639-20250801102630':
+    resolution: {integrity: sha512-rAMyKrH459JRxp1drr6hycPecTVLLQRSzs/GpxyUxFJWnGMYHgHhxK5Io2MvzcOYhvezRvpL9BsOaaDdFyVxDg==}
+    peerDependencies:
+      '@swc/helpers': '>=0.5.1'
+    peerDependenciesMeta:
+      '@swc/helpers':
+        optional: true
+
+  '@rspack/lite-tapable@1.0.1':
+    resolution: {integrity: sha512-VynGOEsVw2s8TAlLf/uESfrgfrq2+rcXB1muPJYBWbsm1Oa6r5qVQhjA5ggM6z/coYPrsVMgovl3Ff7Q7OCp1w==}
+    engines: {node: '>=16.0.0'}
 
   '@shikijs/core@3.9.2':
     resolution: {integrity: sha512-3q/mzmw09B2B6PgFNeiaN8pkNOixWS726IHmJEpjDAcneDPMQmUg2cweT9cWXY4XcyQS3i6mOOUgQz9RRUP6HA==}
@@ -6851,6 +6866,14 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.46.2':
     optional: true
+
+  '@rspack-canary/browser@1.4.12-canary-4f117639-20250801102630':
+    dependencies:
+      '@napi-rs/wasm-runtime': 1.0.1
+      '@rspack/lite-tapable': 1.0.1
+      buffer: 6.0.3
+
+  '@rspack/lite-tapable@1.0.1': {}
 
   '@shikijs/core@3.9.2':
     dependencies:

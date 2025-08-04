@@ -110,6 +110,7 @@ const errorText = computed(() => {
       flex-1
     >
       <CodeEditor
+        v-if="tabs.length"
         :model-value="data?.output[value] || ''"
         language="javascript"
         readonly
@@ -117,6 +118,7 @@ const errorText = computed(() => {
         w-full
         flex-1
       />
+      <span v-else ma text-lg font-mono>No output</span>
     </Tabs>
     <div
       v-if="status === 'success' && data?.warnings?.length"

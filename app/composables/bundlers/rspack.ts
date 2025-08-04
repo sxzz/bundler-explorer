@@ -8,7 +8,7 @@ export const rspack: Bundler = {
   id: 'rspack',
   name: 'Rspack',
   icon: '',
-  version: RspackAPI.version,
+  version: RspackAPI.rspackVersion,
   pkgName: '@rspack/browser',
   configFile: 'rspack.config.js',
   api: RspackAPI,

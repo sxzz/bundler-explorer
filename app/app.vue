@@ -9,7 +9,7 @@ const url = 'https://bundler.sxzz.dev/'
 //   height: 1280,
 //   type: 'image/png',
 // } as const
-useServerSeoMeta({
+useSeoMeta({
   title,
   description: desc,
   ogTitle: title,
@@ -22,7 +22,7 @@ useServerSeoMeta({
   // twitterCard: 'summary_large_image',
 })
 
-useServerHeadSafe({
+useHeadSafe({
   htmlAttrs: {
     lang: 'en',
   },

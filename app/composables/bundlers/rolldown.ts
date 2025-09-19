@@ -1,7 +1,6 @@
 import { rolldown as build, VERSION as version } from '@rolldown/browser'
 import * as RolldownAPI from '@rolldown/browser'
 import * as RolldownExperimentalAPI from '@rolldown/browser/experimental'
-import { resolve } from 'pathe'
 // @ts-expect-error missing types
 import * as RolldownBinding from '../../../node_modules/@rolldown/browser/dist/rolldown-binding.wasi-browser'
 import type { Bundler } from './index'
@@ -16,13 +15,20 @@ export const rolldown: Bundler = {
   pkgName: '@rolldown/browser',
   configFile: 'rolldown.config.js',
   api: {
-    ...RolldownAPI,
+    index: RolldownAPI,
     experimental: RolldownExperimentalAPI,
-    _binding: RolldownBinding,
+    binding: RolldownBinding,
   },
   async build(files, input, config) {
-    const warnings: string[] = []
+    const { __volume } = RolldownBinding
+    __volume.reset()
+    const inputFileJSON: Record<string, string> = {}
+    for (const file of files.values()) {
+      inputFileJSON[file.filename] = file.code
+    }
+    __volume.fromJSON(inputFileJSON)
 
+    const warnings: string[] = []
     const inputOptions: RolldownAPI.InputOptions = {
       input,
       cwd: '/',
@@ -34,24 +40,6 @@ export const rolldown: Bundler = {
         }
       },
       ...config,
-      plugins: [
-        {
-          name: 'bundler-explorer:fs',
-          resolveId(source, importer) {
-            if (source[0] === '/' || source[0] === '.') {
-              return resolve(importer || '/', '..', source)
-            }
-          },
-          load(id) {
-            if (id[0] !== '/') return
-            id = id.slice(1)
-            if (files.has(id)) {
-              return files.get(id)!.code
-            }
-          },
-        },
-        config?.plugins,
-      ],
     }
     const outputOptions: RolldownAPI.OutputOptions = {
       format: 'esm',

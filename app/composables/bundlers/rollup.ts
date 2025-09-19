@@ -16,7 +16,7 @@ export const rollup: Bundler = {
   async build(files, input, config) {
     const warnings: string[] = []
 
-    const options: RollupAPI.RollupOptions = {
+    const inputOptions: RollupAPI.RollupOptions = {
       input,
       onLog(level, log, logger) {
         if (level === 'warn') {
@@ -58,12 +58,16 @@ export const rollup: Bundler = {
         config?.plugins,
       ],
     }
-    console.info('Rollup options:', options)
-    const bundle = await RollupAPI.rollup(options)
-    const result = await bundle.generate({
+    const outputOptions: RollupAPI.OutputOptions = {
       format: 'esm',
       ...config?.output,
-    })
+    }
+
+    const bundle = await RollupAPI.rollup(inputOptions)
+    const result = await bundle.generate(outputOptions)
+    console.info('Rollup input options', inputOptions)
+    console.info('Rollup output options', outputOptions)
+
     const output = Object.fromEntries(
       result.output.map((chunk) =>
         chunk.type === 'chunk'

@@ -51,6 +51,8 @@ export const esbuild: Bundler<undefined> = {
       ],
       write: false,
     }
+    console.info('esbuild options', options)
+
     const bundle = await EsbuildAPI.build<BuildOptions>(options)
     const output = Object.fromEntries(
       bundle.outputFiles!.map((file) => [file.path.slice(1), file.text]),

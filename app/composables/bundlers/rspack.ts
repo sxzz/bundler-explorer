@@ -28,6 +28,8 @@ export const rspack: Bundler = {
       ...config,
     }
 
+    console.info('Rspack options', options)
+
     return new Promise<TransformResult>((resolve, reject) => {
       RspackAPI.rspack(options, (error, stats) => {
         if (error) reject(error)

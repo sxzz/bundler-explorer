@@ -62,11 +62,11 @@ export const rollup: Bundler = {
       format: 'esm',
       ...config?.output,
     }
+    console.info('Rollup input options', inputOptions)
+    console.info('Rollup output options', outputOptions)
 
     const bundle = await RollupAPI.rollup(inputOptions)
     const result = await bundle.generate(outputOptions)
-    console.info('Rollup input options', inputOptions)
-    console.info('Rollup output options', outputOptions)
 
     const output = Object.fromEntries(
       result.output.map((chunk) =>

@@ -21,8 +21,8 @@ importers:
         specifier: ^4.52.4
         version: 4.52.4
       '@rspack/browser':
-        specifier: ^1.5.8
-        version: 1.5.8
+        specifier: ^1.6.0-beta.0
+        version: 1.6.0-beta.0
       '@shikijs/monaco':
         specifier: ^3.13.0
         version: 3.13.0
@@ -1462,8 +1462,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@rspack/browser@1.5.8':
-    resolution: {integrity: sha512-tCnqsZLktAA7MDF+8cJimAIDrST5IwfnRZ2nb8z+vHSA3uLq6vntnoBpvfWU76m9ApYCZV9VOoQmsfZbYja71A==}
+  '@rspack/browser@1.6.0-beta.0':
+    resolution: {integrity: sha512-QWOLG8Wo/EFTJFE3tGGbAjHTkNpt9Uv/D8RN+4rlfbxJh9gKRqUb4IdKmUji6adN8/lYz6sG5VYvpNmTh5K3Bw==}
     peerDependencies:
       '@swc/helpers': '>=0.5.1'
     peerDependenciesMeta:
@@ -3731,8 +3731,8 @@ packages:
   mdn-data@2.12.2:
     resolution: {integrity: sha512-IEn+pegP1aManZuckezWCO+XZQDplx1366JoVhTpMpBB1sPey/SbveZQUosKiKiGYjg1wH4pMlNgXbCiYgihQA==}
 
-  memfs@4.46.0:
-    resolution: {integrity: sha512-//IxqL9OO/WMpm2kE2aq+y7vO7/xS9xgVIbFM8RUIfW7TY7lowtnuS1j9MwLGm0OwcHUa4p8Bp+40W7f1BiWGQ==}
+  memfs@4.48.1:
+    resolution: {integrity: sha512-vWO+1ROkhOALF1UnT9aNOOflq5oFDlqwTXaPg6duo07fBLxSH0+bcF0TY1lbA1zTNKyGgDxgaDdKx5MaewLX5A==}
 
   merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
@@ -6730,13 +6730,13 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.51.0':
     optional: true
 
-  '@rspack/browser@1.5.8':
+  '@rspack/browser@1.6.0-beta.0':
     dependencies:
       '@napi-rs/wasm-runtime': 1.0.7
       '@rspack/lite-tapable': 1.0.1
       '@swc/types': 0.1.25
       '@types/watchpack': 2.4.4
-      memfs: 4.46.0
+      memfs: 4.48.1
       webpack-sources: 3.3.3
 
   '@rspack/lite-tapable@1.0.1': {}
@@ -9389,7 +9389,7 @@ snapshots:
 
   mdn-data@2.12.2: {}
 
-  memfs@4.46.0:
+  memfs@4.48.1:
     dependencies:
       '@jsonjoy.com/json-pack': 1.14.0(tslib@2.8.1)
       '@jsonjoy.com/util': 1.9.0(tslib@2.8.1)

@@ -17,7 +17,7 @@ const { branch } = useAppConfig()
 function resetState() {
   if (
     // eslint-disable-next-line no-alert
-    window.confirm(
+    confirm(
       'Are you sure you want to reset the code and config to their default values?',
     )
   ) {

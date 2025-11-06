@@ -3,7 +3,7 @@ export const isDark = useDark()
 const isAppearanceTransition =
   typeof document !== 'undefined' &&
   'startViewTransition' in document &&
-  !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  !matchMedia('(prefers-reduced-motion: reduce)').matches
 
 /**
  * Credit to [@hooray](https://github.com/hooray)
@@ -33,7 +33,7 @@ export function toggleDark(event?: MouseEvent) {
     ]
     document.documentElement.animate(
       {
-        clipPath: isDark.value ? [...clipPath].reverse() : clipPath,
+        clipPath: isDark.value ? [...clipPath].toReversed() : clipPath,
       },
       {
         duration: 400,

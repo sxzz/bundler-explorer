@@ -2,7 +2,7 @@ import {
   defineConfig,
   presetAttributify,
   presetIcons,
-  presetUno,
+  presetWind3,
   transformerDirectives,
 } from 'unocss'
 
@@ -26,7 +26,7 @@ export default defineConfig({
     'z-panel': 'z-10',
   },
   presets: [
-    presetUno({
+    presetWind3({
       attributifyPseudo: true,
     }),
     presetAttributify(),

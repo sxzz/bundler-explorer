@@ -1,4 +1,4 @@
-import { transform as oxcTransform } from '@rolldown/browser/experimental'
+import { transformSync as oxcTransform } from '@rolldown/browser/experimental'
 import * as RollupAPI from '@rollup/browser'
 import { resolve } from 'pathe'
 import type { Bundler } from './index'

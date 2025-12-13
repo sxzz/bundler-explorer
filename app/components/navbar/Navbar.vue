@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { version } from '~~/package.json'
 import * as monaco from 'monaco-editor'
+import { version } from '~~/package.json'
 import { toggleDark } from '~/composables/dark'
 import {
   activeFile,

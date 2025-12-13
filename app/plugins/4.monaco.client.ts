@@ -1,22 +1,23 @@
 import { activeFile, files } from '~/state/bundler'
+import type Monaco from 'monaco-editor'
 
 export default defineNuxtPlugin(async () => {
-  const monaco = await useMonaco()
-  monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+  const monaco: typeof Monaco = await useMonaco()
+  monaco.json.jsonDefaults.setDiagnosticsOptions({
     allowComments: true,
     enableSchemaRequest: true,
     trailingCommas: 'ignore',
   })
 
-  monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
-    target: monaco.languages.typescript.ScriptTarget.ESNext,
-    module: monaco.languages.typescript.ModuleKind.ESNext,
+  monaco.typescript.typescriptDefaults.setCompilerOptions({
+    target: monaco.typescript.ScriptTarget.ESNext,
+    module: monaco.typescript.ModuleKind.ESNext,
     allowNonTsExtensions: true,
     allowImportingTsExtensions: true,
-    moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
+    moduleResolution: monaco.typescript.ModuleResolutionKind.NodeJs,
     noEmit: true,
     esModuleInterop: true,
-    jsx: monaco.languages.typescript.JsxEmit.Preserve,
+    jsx: monaco.typescript.JsxEmit.Preserve,
     resolveJsonModule: true,
   })
 

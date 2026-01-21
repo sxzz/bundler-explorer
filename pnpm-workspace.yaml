@@ -1,0 +1,9 @@
+allowBuilds:
+  '@parcel/watcher': false
+  '@rolldown/browser': false
+  esbuild: false
+
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  - chokidar@4.0.3
+  - semver@6.3.1

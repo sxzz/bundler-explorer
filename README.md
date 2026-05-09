@@ -23,4 +23,3 @@
 - https://esbuild.egoist.dev/
 - https://esbuild.github.io/try
 - https://rollupjs.org/repl
-- https://repl.rspack.rs/

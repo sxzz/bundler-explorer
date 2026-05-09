@@ -9,7 +9,7 @@ import {
 import type { TransformResult } from '~/composables/bundlers'
 
 const { data, status, error, refresh } = useAsyncData(
-  '',
+  'output',
   async (): Promise<TransformResult> => {
     const bundler = currentBundler.value
     let context: any
